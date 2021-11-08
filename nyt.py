@@ -6,7 +6,7 @@ load_dotenv(find_dotenv())
 
 NYT_API_KEY = os.getenv("NYT_API_KEY")
 most_popular_url = (
-    f"https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key={API_KEY}"
+    f"https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key={NYT_API_KEY}"
 )
 
 
