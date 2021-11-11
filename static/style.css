@@ -20,20 +20,22 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-  }
+}
   
-  a.btnStack:hover {
+a.btnStack:hover {
     background-color: #000;
-  }
+}
 
-  .right{
-      float: right
+.right{
+    float: right
       
-  }
-  .left{
+}
+
+.left{
     float: left
     
 }
+
 .cell {
     border: 1px solid black;
 }
@@ -46,13 +48,12 @@
     height: 50px;
     width: auto;
     background: lightblue;
-    
-
 }
 
 #head{
     clear: both;
 }
+
 .blocktext {
     margin-left: auto;
     margin-right: auto;
@@ -61,5 +62,8 @@
 
 #body {
     padding: 10px;			
+}
+h1{
+    text-align: center;
 }
 
