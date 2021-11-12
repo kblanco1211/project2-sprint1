@@ -9,12 +9,12 @@ def get_assets():
     token_ids = []
 
     url = "https://api.opensea.io/api/v1/assets"
-    params = {"limit": 10}
+    params = {"limit": 16}
 
     response = requests.get(url, params=params)
     response_json = response.json()
 
-    for i in range(10):
+    for i in range(16):
         image_urls.append(response_json["assets"][i]["image_url"])
         names.append(response_json["assets"][i]["name"])
         try:
