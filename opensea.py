@@ -2,27 +2,37 @@ import requests
 
 
 def get_assets():
+    image_urls = []
+    names = []
+    creators = []
+    contract_addresses = []
+    token_ids = []
+
     url = "https://api.opensea.io/api/v1/assets"
-    params = {"limit": 1}
+    params = {"limit": 10}
 
     response = requests.get(url, params=params)
     response_json = response.json()
 
-    permalink = response_json["assets"][0]["permalink"]
-    image_url = response_json["assets"][0]["image_url"]
-    name = response_json["assets"][0]["name"]
-    try:
-        creator = response_json["assets"][0]["creator"]["user"]["username"]
-    except:
-        creator = None
-    contract_address = response_json["assets"][0]["asset_contract"]["address"]
-    token_id = response_json["assets"][0]["token_id"]
-    print(permalink)
-    print(image_url)
-    print(name)
-    print(creator)
-    print(contract_address)
-    print(token_id)
+    for i in range(10):
+        image_urls.append(response_json["assets"][i]["image_url"])
+        names.append(response_json["assets"][i]["name"])
+        try:
+            creators.append(response_json["assets"][i]["creator"]["user"]["username"])
+        except:
+            creators.append(None)
+        contract_addresses.append(
+            response_json["assets"][i]["asset_contract"]["address"]
+        )
+        token_ids.append(response_json["assets"][i]["token_id"])
+
+    return {
+        "image_urls": image_urls,
+        "names": names,
+        "creators": creators,
+        "contract_addresses": contract_addresses,
+        "token_ids": token_ids,
+    }
 
 
 def get_single_asset(contract_address, token_id):
@@ -57,7 +67,3 @@ def get_single_asset(contract_address, token_id):
 
 
 get_assets()
-get_single_asset(
-    "0xf43aaa80a8f9de69bc71aea989afceb8db7b690f",
-    "2090",
-)
