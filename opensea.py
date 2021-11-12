@@ -4,7 +4,7 @@ import requests
 def get_assets():
     image_urls = []
     names = []
-    creators = []
+    collections = []
     contract_addresses = []
     token_ids = []
 
@@ -18,9 +18,9 @@ def get_assets():
         image_urls.append(response_json["assets"][i]["image_url"])
         names.append(response_json["assets"][i]["name"])
         try:
-            creators.append(response_json["assets"][i]["creator"]["user"]["username"])
+            collections.append(response_json["assets"][i]["collection"]["name"])
         except:
-            creators.append(None)
+            collections.append(None)
         contract_addresses.append(
             response_json["assets"][i]["asset_contract"]["address"]
         )
@@ -29,7 +29,7 @@ def get_assets():
     return {
         "image_urls": image_urls,
         "names": names,
-        "creators": creators,
+        "collections": collections,
         "contract_addresses": contract_addresses,
         "token_ids": token_ids,
     }

@@ -24,8 +24,8 @@ def explore():
         "explore.html",
         image_urls=assets["image_urls"],
         names=assets["names"],
-        creators=assets["creators"],
-        contract_adresses=assets["contract_addresses"],
+        collections=assets["collections"],
+        contract_addresses=assets["contract_addresses"],
         token_ids=assets["token_ids"],
     )
 

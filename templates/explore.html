@@ -9,7 +9,11 @@
     <h1>Explore NFTs</h1>
     <div class="container">
         {% for i in range(16) %}
-        <div>{{ i }}</div>
+        <div class="nft">
+            <img src="{{ image_urls[i] }}" alt="NFT iamge"> <br>
+            <b>{{ collections[i] }}</b> <br>
+            <b>{{ names[i] }}</b>
+        </div>
         {% endfor %}
     </div>
 </body>
