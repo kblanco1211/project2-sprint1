@@ -12,7 +12,13 @@
         <div class="nft">
             <img src="{{ image_urls[i] }}" alt="NFT iamge"> <br>
             <b>{{ collections[i] }}</b> <br>
-            <b>{{ names[i] }}</b>
+            <b>{{ names[i] }}</b> <br>
+            <form action="/details" method="POST">
+                <b>Click to learn more about this NFT!</b>
+                <input type="hidden" name="contract_address" value="{{ contract_addresses[i] }}">
+                <input type="hidden" name="token_id" value="{{ token_ids[i] }}">
+                <input type="submit" value="Learn More">
+            </form>
         </div>
         {% endfor %}
     </div>

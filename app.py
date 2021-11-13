@@ -32,11 +32,25 @@ def explore():
 
 
 # route that displays and explains the details of a chosen NFT
-@app.route("/details")
+@app.route("/details", methods=["POST"])
 def details():
-    asset_details = get_single_asset()
+    contract_address = flask.request.form.get("contract_address")
+    token_id = flask.request.form.get("token_id")
+    asset_details = get_single_asset(contract_address, token_id)
 
-    return flask.render_template("details.html")
+    return flask.render_template(
+        "details.html",
+        image_url=asset_details["image_url"],
+        name=asset_details["name"],
+        collection_name=asset_details["collection_name"],
+        description=asset_details["description"],
+        creator=asset_details["creator"],
+        price=asset_details["price"],
+        crypto=asset_details["crypto"],
+        traits=asset_details["traits"],
+        contract_address=contract_address,
+        token_id=token_id,
+    )
 
 
 # route that displays a user's displayed NFTs
