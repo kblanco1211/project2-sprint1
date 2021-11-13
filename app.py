@@ -16,6 +16,7 @@ def index():
     return flask.render_template("index.html")
 
 
+# route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details
 @app.route("/explore")
 def explore():
     assets = get_assets()
@@ -30,6 +31,7 @@ def explore():
     )
 
 
+# route that displays and explains the details of a chosen NFT
 @app.route("/details")
 def details():
     asset_details = get_single_asset()
@@ -37,6 +39,7 @@ def details():
     return flask.render_template("details.html")
 
 
+# route that displays a user's displayed NFTs
 @app.route("/saved")
 def saved():
     return flask.render_template("saved.html")
