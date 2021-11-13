@@ -9,18 +9,17 @@ body {
 
 .left, .right {
   flex: 50%;
-}
-
-.nft {
-  border-style: solid;
-  border-color: black;
-  border-radius: 25px;
   margin: auto;
 }
 
-.nft, img {
-  border-top-right-radius: 25px;
-  border-top-left-radius: 25px;  
+.nft {
+  margin: auto;
+}
+
+img {
+  border-radius: 25px; 
+  border-style: solid;
+  border-color: black;
 }
 
 .save {
@@ -52,7 +51,7 @@ body {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }

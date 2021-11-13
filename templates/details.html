@@ -9,32 +9,54 @@
     <div class="container">
         <div class="left">
             <div class="nft">
-                <img src="{{ image_url }}"> <br>
-                <button class="save">Save NFT</button>
+                <img src="{{ image_url }}"> <br><br>
+                <button class="save">Save NFT</button> <br><br>
             </div>
 
             <b>Created By: {{ creator }}</b> <br>
             <b>Description: {{ description }}</b> <br><br>
-
-            <div class="dropdown">
-                <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
-                <div class="dropdown-content">
-                    <a href="#">Explanation/Context</a>
-                </div>
-            </div>
-            <br><br>
-            <div class="dropdown">
-                <button class="dropbtn"><b><u>Details</u></b></button>
-                <div class="dropdown-content">
-                    <a href="#">Contract Address: {{contract_address}}</a>
-                    <a href="#">Token ID: {{token_id}}</a>
-                    <a href="#">Explanation/Context</a>
-                </div>
-            </div>
         </div>
 
         <div class="right">
-            <b>Info</b>
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>Explanation/Context</li>
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Collection: {{ collection }}</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>{{ collection_description }}</li>
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Traits</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        {% for i in range(trait_types|length) %}
+                        <li>{{ trait_types[i] }}: {{ traits[i] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Details</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>Contract Address: {{contract_address}}</li>
+                        <li>Token ID: {{token_id}}</li>
+                        <li>Explanation/Context</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </body>
