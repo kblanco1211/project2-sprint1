@@ -7,12 +7,30 @@ body {
   flex-wrap: wrap;
 }
 
-.nft {
+.left, .right {
   flex: 50%;
 }
 
-.info {
-  flex: 50%;
+.nft {
+  border-style: solid;
+  border-color: black;
+  border-radius: 25px;
+  margin: auto;
+}
+
+.nft, img {
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;  
+}
+
+.save {
+  background-color: #045faa;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  width: 125px  
 }
 
 .dropbtn {
@@ -50,4 +68,4 @@ body {
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: #356eb8;}

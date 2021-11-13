@@ -7,11 +7,22 @@
 
 <body>
     <div class="container">
-        <div class="nft">
-            <img src="{{ image_url }}"> <br>
-            <b>Created By: {{ creator }}</b> <br>
-            <b>Description: {{ description }}</b> <br>
+        <div class="left">
+            <div class="nft">
+                <img src="{{ image_url }}"> <br>
+                <button class="save">Save NFT</button>
+            </div>
 
+            <b>Created By: {{ creator }}</b> <br>
+            <b>Description: {{ description }}</b> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
+                <div class="dropdown-content">
+                    <a href="#">Explanation/Context</a>
+                </div>
+            </div>
+            <br><br>
             <div class="dropdown">
                 <button class="dropbtn"><b><u>Details</u></b></button>
                 <div class="dropdown-content">
@@ -21,7 +32,8 @@
                 </div>
             </div>
         </div>
-        <div class="info">
+
+        <div class="right">
             <b>Info</b>
         </div>
     </div>
