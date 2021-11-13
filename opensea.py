@@ -59,13 +59,19 @@ def get_single_asset(contract_address, token_id):
         name = response_json["name"]
         collection_name = response_json["collection"]["name"]
         description = response_json["description"]
-        creator = response_json["creator"]["user"]["username"]
+        try:
+            creator = response_json["creator"]["user"]["username"]
+        except:
+            creator = None
         try:
             string_price = response_json["orders"][0]["current_price"]
             price = round(int(string_price) * 0.000000000000000001, 3)
         except:
             price = None
-        crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
+        try:
+            crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
+        except:
+            crypto = None
         traits = response_json["traits"]
     except:
         return "error"
@@ -83,3 +89,6 @@ def get_single_asset(contract_address, token_id):
         "contract_address": contract_address,
         "token_id": token_id,
     }
+
+
+get_assets()

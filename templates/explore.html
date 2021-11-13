@@ -10,7 +10,11 @@
     <div class="container">
         {% for i in range(16) %}
         <div class="nft">
+            {% if image_urls[i] == "" %}
+            <img src="/static/nft.jpg" alt="NFT iamge"> <br>
+            {% else %}
             <img src="{{ image_urls[i] }}" alt="NFT iamge"> <br>
+            {% endif %}
             <b>{{ collections[i] }}</b> <br>
             <b>{{ names[i] }}</b> <br>
             <form action="/details" method="POST">

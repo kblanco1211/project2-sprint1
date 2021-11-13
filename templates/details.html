@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>NFTStache</title>
+    <link href="/static/details_style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nft">
+            <img src="{{ image_url }}"> <br>
+            <b>Created By: {{ creator }}</b> <br>
+            <b>Description: {{ description }}</b> <br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Details</u></b></button>
+                <div class="dropdown-content">
+                    <a href="#">Contract Address: {{contract_address}}</a>
+                    <a href="#">Token ID: {{token_id}}</a>
+                    <a href="#">Explanation/Context</a>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <b>Info</b>
+        </div>
+    </div>
+</body>
+
+</html>
