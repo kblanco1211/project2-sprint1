@@ -30,6 +30,13 @@ def explore():
     )
 
 
+@app.route("/details")
+def details():
+    asset_details = get_single_asset()
+
+    return flask.render_template("details.html")
+
+
 @app.route("/saved")
 def saved():
     return flask.render_template("saved.html")
