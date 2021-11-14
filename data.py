@@ -1,1 +1,1 @@
-# implement database logic here
+from app import db
