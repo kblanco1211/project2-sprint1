@@ -8,7 +8,7 @@ app = flask.Flask(__name__)
 from dotenv import load_dotenv, find_dotenv
 from flask_login import (
     login_user,
-    UserNow,
+    UserMixin,
     LoginManager,
     login_required,
 )
@@ -20,17 +20,21 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-class User(UserNow, db.Model):
+
+class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
+
     def __repr__(self):
         return f"<User {self.username}>"
+
     def get_username(self):
         """
         Getter for username attribute
         """
         return self.username
+
 
 print("Hello")
 
@@ -39,6 +43,7 @@ login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_name):
     """
@@ -46,9 +51,8 @@ def load_user(user_name):
     """
     return User.query.get(user_name)
 
+
 @login_required
-
-
 @app.route("/")
 def index():
     return flask.render_template("index.html")
@@ -87,6 +91,7 @@ def saved():
 def login():
     return flask.render_template("login.html")
 
+
 @app.route("/login", methods=["POST"])
 def login_post():
     """
@@ -100,8 +105,8 @@ def login_post():
 
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
 
-@app.route("/save", methods=["POST"])
 
+@app.route("/save", methods=["POST"])
 @app.route("/signup")
 def signup():
     return flask.render_template("signup.html")
