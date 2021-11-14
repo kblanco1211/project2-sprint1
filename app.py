@@ -112,7 +112,6 @@ def login_post():
 def signup():
     return flask.render_template("signup.html")
 
-
 @app.route("/why")
 def why():
     return flask.render_template("why.html")
