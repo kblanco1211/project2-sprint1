@@ -53,6 +53,7 @@ def load_user(user_name):
 
 
 @login_required
+
 @app.route("/")
 def index():
     return flask.render_template("index.html")
@@ -110,6 +111,27 @@ def login_post():
 @app.route("/signup")
 def signup():
     return flask.render_template("signup.html")
+
+
+@app.route("/why")
+def why():
+    return flask.render_template("why.html")
+
+@app.route("/history")
+def history():
+    return flask.render_template("history.html")
+
+@app.route("/crypto")
+def crypto():
+    return flask.render_template("crypto.html")
+
+@app.route("/purchase")
+def purchase():
+    return flask.render_template("purchase.html")   
+
+@app.route("/future")
+def future():
+    return flask.render_template("future.html")   
 
 
 app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True)
