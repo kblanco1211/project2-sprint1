@@ -1,1 +1,58 @@
-<h1>Hello</h1>
+<html>
+
+<head>
+    <title>NFT Information </title>
+    <link rel="stylesheet" href="/static/homepage.css">
+
+</head>
+
+<body>
+
+    <div id=navigation class="cell small-12 medium-12 large-12">
+        <nav class="centerbutton">
+            <!--
+                will add url to diffrent templates in diffrent branch 
+            -->
+            <div class="left">
+                <a href={{ url_for('index') }} class="btnStack ">Explore NFTs</a>
+            </div>
+            <div class="right">
+                <a href={{ url_for('index') }} class="btnStack  ">The why</a>
+                <a href={{ url_for('index') }} class="btnStack  ">History</a>
+                <a href={{ url_for('index') }} class="btnStack  ">Crypto Currency</a>
+                <a href={{ url_for('index') }} class="btnStack  ">How To Purchase</a>
+                <a href={{ url_for('index') }} class="btnStack  ">The Future</a>
+            </div>
+        </nav>
+    </div>
+    <h1>What are NFTs</h1>
+    <div id="middleblock" >
+        <p class="center">
+            NFTs stand for a Non-fungible token. A "Non-fungible” more or less means
+            that it’s unique and can’t be replaced with something else its one of a kind persay.
+        </p>
+    
+        <h2 class="center">How do they work?</h2>
+        <p class="center">
+            At a very high level Most NFTs are part of the Ethereum blockchain.
+            Ethereum is a cryptocurrency, like
+            bitcoin or dogecoin, but its blockchain also supports these NFTs, which store
+            extra information that makes them work differently from, say, an ETH coin. It is worth noting
+            that other blockchains can implement their own versions of NFTs as well.
+            NFTs are minted through smart contracts that assign ownership and manage the transferability of
+            the NFT's. When someone creates or mints an NFT, they execute code stored in smart contracts that
+            conform to different standards, such as ERC-721. This information is added to the blockchain where
+            the NFT is being managed.
+        </p>
+    
+        <h2 class="center">What can they be?</h2>
+        <p class="center">
+            NFTs can really be anything digital (such as drawings, music, your brain downloaded and turned into an AI), but
+            a lot of the current
+            excitement is around using the tech to sell digital art.
+        </p>
+    </div>
+    
+</body>
+
+</html>
