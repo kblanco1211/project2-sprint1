@@ -13,6 +13,11 @@
                 <button class="save">Save NFT</button> <br><br>
             </div>
 
+            {% if name == None %}
+            <b class="name"> # {{ token_id }}</b> <br>
+            {% else %}
+            <b class="name"> {{ name }}</b> <br>
+            {% endif %}
             <b>Created By: {{ creator }}</b> <br>
             <b>Description: {{ description }}</b> <br><br>
         </div>
@@ -32,6 +37,13 @@
                 <div class="dropdown-content">
                     <ul>
                         <li>{{ collection_description }}</li>
+                        <li>
+                            <b class="explanation">
+                                NFTs are sometimes part of a collection, where NFTs in a collection share the same
+                                traits. It could be analogized to trading cards where Pokemon and Yu-Gi-Oh would be
+                                their own collections.
+                            </b>
+                        </li>
                     </ul>
                 </div>
             </div> <br><br>
@@ -41,8 +53,19 @@
                 <div class="dropdown-content">
                     <ul>
                         {% for i in range(trait_types|length) %}
-                        <li>{{ trait_types[i] }}: {{ traits[i] }}</li>
+                        <li><span style="color:green">{{ trait_types[i] }}</span>: <span style="color:blue">{{
+                                traits[i] }}</span></li>
                         {% endfor %}
+                        <li>
+                            <b class="explanation">
+                                A collection of NFTs has its own set of trait types and they are shown in green above.
+                                Within each type, the NFT will have a specific trait of thatt type which is shown in
+                                blue above.
+                                NFTs in a collection are usually randomly designated traits, and NFTs within a
+                                collection are rarer when they have specific traits that many others in the collection
+                                don't have.
+                            </b>
+                        </li>
                     </ul>
                 </div>
             </div> <br><br>
@@ -53,7 +76,20 @@
                     <ul>
                         <li>Contract Address: {{contract_address}}</li>
                         <li>Token ID: {{token_id}}</li>
-                        <li>Explanation/Context</li>
+                        <li>
+                            <b class="explanation">
+                                The contract address of an NFT refers to the unique address where the contract is
+                                deployed on the Ethereum block chain.
+                                A contract is needed to make an NFT a part of the blockchain, and they assign ownership
+                                and manage the transferibility of an NFT.
+                            </b>
+                        </li>
+                        <li>
+                            <b class="explanation">
+                                The token ID of an NFT is used to uniquely identify the NFT. The token ID and the
+                                contract address make up a globally unique and fully-qualified identifier for the NFT.
+                            </b>
+                        </li>
                     </ul>
                 </div>
             </div>

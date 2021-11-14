@@ -16,6 +16,10 @@ body {
   margin: auto;
 }
 
+.name {
+  font-size: 32px;
+}
+
 img {
   border-radius: 25px; 
   border-style: solid;
@@ -30,6 +34,10 @@ img {
   border: none;
   border-radius: 25px;
   width: 125px  
+}
+
+.explanation {
+  color: #045faa;
 }
 
 .dropbtn {
