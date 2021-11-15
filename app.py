@@ -21,6 +21,9 @@ def index():
 def explore():
     assets = get_assets()
 
+    if assets == "error":
+        return flask.render_template("api_error.html", error="explore")
+
     return flask.render_template(
         "explore.html",
         image_urls=assets["image_urls"],
@@ -37,6 +40,9 @@ def details():
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
+
+    if asset_details == "error":
+        return flask.render_template("api_error.html", error="details")
 
     return flask.render_template(
         "details.html",
