@@ -62,6 +62,7 @@ def details():
     )
 
 
+# route that saves an NFT to a user's list of saved NFTs
 @app.route("/save_nft", methods=["POST"])
 def save_nft():
     contract_address = flask.request.form.get("contract_address")

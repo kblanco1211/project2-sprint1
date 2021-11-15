@@ -18,6 +18,12 @@ def get_assets():
         "cryptopunks",
         "mutant-ape-yacht-club",
         "edifice-by-ben-kovach",
+        "cool-cats-nft",
+        "lilbabyapeclub",
+        "doodles-official",
+        "cryptoadz-by-gremplin",
+        "cyberkongz",
+        "mekaverse",
     ]
     i = random.randrange(len(collection_slugs))
     params = {"limit": 16, "collection": collection_slugs[i]}
@@ -40,10 +46,7 @@ def get_assets():
                 response_json["assets"][i]["asset_contract"]["address"]
             )
             token_ids.append(response_json["assets"][i]["token_id"])
-
-        print("success")
     except:
-        print("error")
         return "error"
 
     return {
@@ -92,8 +95,6 @@ def get_single_asset(contract_address, token_id):
     except:
         return "error"
 
-    print(response_json["collection"]["slug"])
-
     # information on the given NFT is returned
     return {
         "image_url": image_url,
@@ -109,7 +110,3 @@ def get_single_asset(contract_address, token_id):
         "contract_address": contract_address,
         "token_id": token_id,
     }
-
-
-get_assets()
-get_single_asset("0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270", "204000405")
