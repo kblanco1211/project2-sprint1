@@ -7,6 +7,7 @@ app = flask.Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 db = SQLAlchemy(app)
 
@@ -39,6 +40,37 @@ def explore():
 def details():
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
+    asset_details = get_single_asset(contract_address, token_id)
+
+    if asset_details == "error":
+        return flask.render_template("api_error.html", error="details")
+
+    return flask.render_template(
+        "details.html",
+        image_url=asset_details["image_url"],
+        name=asset_details["name"],
+        collection=asset_details["collection"],
+        collection_description=asset_details["collection_description"],
+        description=asset_details["description"],
+        creator=asset_details["creator"],
+        price=asset_details["price"],
+        crypto=asset_details["crypto"],
+        trait_types=asset_details["trait_types"],
+        traits=asset_details["traits"],
+        contract_address=contract_address,
+        token_id=token_id,
+    )
+
+
+@app.route("/save_nft", methods=["POST"])
+def save_nft():
+    contract_address = flask.request.form.get("contract_address")
+    token_id = flask.request.form.get("token_id")
+
+    # add logic to add NFT to saved NFT table
+
+    flask.flash("NFT has been successfully saved")
+
     asset_details = get_single_asset(contract_address, token_id)
 
     if asset_details == "error":

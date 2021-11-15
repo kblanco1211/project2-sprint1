@@ -16,6 +16,11 @@ body {
   margin: auto;
 }
 
+.flashes {
+  font-weight: bold;
+  color: red;    
+}
+
 .name {
   font-size: 32px;
 }
