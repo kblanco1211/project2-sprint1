@@ -1,17 +1,11 @@
-<<<<<<< HEAD
-=======
 """Main app file that contains flask server logic."""
 
->>>>>>> b2599f73058f5c281232e4f711f994c02e6a9d30
 import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_login.utils import login_required
-<<<<<<< HEAD
 
-=======
->>>>>>> b2599f73058f5c281232e4f711f994c02e6a9d30
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from flask_login import (
@@ -180,41 +174,13 @@ def login_post():
 
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
 
+#@app.route("/save", methods=["POST"])
+#def save():
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-@app.route("/save", methods=["POST"])
-def save():
-    artist_ids = flask.request.json.get("artist_ids")
-    valid_ids = set()
-    for artist_id in artist_ids:
-        try:
-            access_token = get_access_token()
-            get_song_data(artist_id, access_token)
-            valid_ids.add(artist_id)
-        except KeyError:
-            pass
 
-    username = current_user.username
-    update_db_ids_for_user(username, valid_ids)
-
-    response = {"artist_ids": [a for a in artist_ids if a in valid_ids]}
-    return flask.jsonify(response)
-
-=======
->>>>>>> b2599f73058f5c281232e4f711f994c02e6a9d30
-=======
 @app.route("/signup", methods=["POST"])
 def signup_post():
     return flask.render_template("/index.html")
-
-
->>>>>>> 378b9a9145627513fb1dfa3c5043c860986e51fb
-@app.route("/signup")
-def signup():
-    """Sign up page"""
-
-    return flask.render_template("signup.html")
 
 
 @app.route("/why")
