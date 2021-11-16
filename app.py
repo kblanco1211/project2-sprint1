@@ -10,11 +10,11 @@ from models import UserModel,db,login
 load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
-
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 
 
 
@@ -122,11 +122,10 @@ def saved():
 
     return flask.render_template("saved.html")
 
-@app.route('/login', methods = ['POST', 'GET'])
+@app.route('/login', methods = ['GET','POST'])
 def login():
     if current_user.is_authenticated:
         return redirect('/index')
-     
     if request.method == 'POST':
         email = request.form['email']
         user = UserModel.query.filter_by(email = email).first()
@@ -137,7 +136,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:
         return redirect('/index')
