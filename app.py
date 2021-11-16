@@ -9,8 +9,7 @@ from models import UserModel,db,login
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
-
+app = flask.Flask(__name__, static_folder="./build/static")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
