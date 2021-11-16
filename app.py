@@ -1,21 +1,14 @@
-<<<<<<< HEAD
-=======
+
 """Main app file that contains flask server logic."""
 
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
-<<<<<<< HEAD
 
 from flask_login.utils import login_required
 
 
-=======
-from flask_login.utils import login_required
-
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 from opensea import get_assets, get_single_asset
 
 import flask
@@ -37,11 +30,8 @@ load_dotenv(find_dotenv())
 app = flask.Flask(__name__, static_folder="./build/static")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-<<<<<<< HEAD
-app.secret_key = b"I am a secret key"
-=======
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
+
 
 db = SQLAlchemy(app)
 
