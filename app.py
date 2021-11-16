@@ -18,12 +18,10 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
-    def create_all():
         db.create_all()
 db.init_app(app)
 login.init_app(app)
 login.login_view = "login"
-
 
 @app.route("/")
 @login_required
