@@ -4,7 +4,6 @@ import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
-
 from flask_login.utils import login_required
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
@@ -166,12 +165,18 @@ def login():
 def login_post():
     """Handler for login form data"""
     email = flask.request.form.get("email")
+    password = flask.request.form.get("password")
     user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
         return flask.redirect(flask.url_for("bp.index"))
 
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
+
+
+@app.route("/signup", methods=["POST"])
+def signup_post():
+    return flask.render_template("/index.html")
 
 
 @app.route("/signup")
