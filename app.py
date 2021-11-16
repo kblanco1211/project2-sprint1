@@ -131,7 +131,7 @@ def login():
         user = UserModel.query.filter_by(email = email).first()
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
-            return redirect('/index')
+            return redirect('/explore')
      
     return render_template('login.html')
 
@@ -139,7 +139,7 @@ def login():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/')
+        return redirect('/explore')
      
     if request.method == 'POST':
         email = request.form['email']
@@ -153,7 +153,7 @@ def signup():
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        return redirect('/login')
+        return redirect('/explore')
     return render_template('signup.html')
 
 
