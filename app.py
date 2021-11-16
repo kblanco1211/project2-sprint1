@@ -186,6 +186,25 @@ def purchase():
 def future():
     return flask.render_template("future.html")
 
+@app.route("/wallets")
+def wallets():
+    return flask.render_template("wallets.html")
+
+@app.route("/ethereum")
+def ethereum():
+    return flask.render_template("ethereum.html")
+
+@app.route("/polygon")
+def polygon():
+    return flask.render_template("polygon.html")
+
+@app.route("/klaytn")
+def klaytn():
+    return flask.render_template("klaytn.html")
+
+
+
+
 
 app.run(
     host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
