@@ -1,7 +1,16 @@
 import os
+from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
+from flask_login.utils import login_required
+
+=======
 from opensea import get_assets, get_single_asset
+<<<<<<< HEAD
 import flask
+=======
+>>>>>>> da483d4ffd475be90f989ddb31b4f1cde4869875
+>>>>>>> dfdb064fa20a5d9c14ebb2740f70065f30769528
 
 
 from dotenv import load_dotenv, find_dotenv
@@ -23,6 +32,19 @@ app.secret_key = b"I am a secret key"
 
 db = SQLAlchemy(app)
 
+<<<<<<< HEAD
+=======
+# db.create_all()
+# login_manager = LoginManager()
+# login_manager.login_view = "login"
+# login_manager.init_app(app)
+
+# @login_manager.user_loader
+# def load_user(user_name):
+#     return User.query.get(user_name)
+
+
+>>>>>>> dfdb064fa20a5d9c14ebb2740f70065f30769528
 class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
