@@ -1,7 +1,13 @@
 import flask
 import os
+from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
+from flask_login.utils import login_required
+
+=======
 from opensea import get_assets, get_single_asset
+>>>>>>> da483d4ffd475be90f989ddb31b4f1cde4869875
 
 app = flask.Flask(__name__)
 
@@ -19,6 +25,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
+# db.create_all()
+# login_manager = LoginManager()
+# login_manager.login_view = "login"
+# login_manager.init_app(app)
+
+# @login_manager.user_loader
+# def load_user(user_name):
+#     return User.query.get(user_name)
 
 
 class User(UserMixin, db.Model):
@@ -133,4 +148,4 @@ def future():
     return flask.render_template("future.html")   
 
 
-app.run(host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 8080)), debug=True)
+app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True)
