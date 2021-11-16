@@ -165,12 +165,18 @@ def login():
 def login_post():
     """Handler for login form data"""
     email = flask.request.form.get("email")
+    password = flask.request.form.get("password")
     user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
         return flask.redirect(flask.url_for("bp.index"))
 
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
+
+
+@app.route("/signup", methods=["POST"])
+def signup_post():
+    return flask.render_template("/index.html")
 
 
 @app.route("/signup")
