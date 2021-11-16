@@ -2,7 +2,14 @@
 import os
 import flask
 from flask import render_template, request, redirect
-from flask_login import login_required, current_user, login_user, logout_user
+from flask_login import (
+    login_manager,
+    login_required,
+    current_user,
+    login_user,
+    logout_user,
+)
+from flask_sqlalchemy import SQLAlchemy
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from models import UserModel, db, login
@@ -15,13 +22,15 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-
-if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
-    db.create_all()
+db = SQLAlchemy(app)
 login.init_app(app)
-
 login.login_view = "login"
 print("Hello")
+
+
+@login_manager.user_loader
+def load_user(id):
+    return UserModel.query.get(int(id))
 
 
 @app.route("/")
