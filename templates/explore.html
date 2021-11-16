@@ -6,17 +6,38 @@
 </head>
 
 <body>
+    <div id=navigation class="cell small-12 medium-12 large-12">
+        <nav class="centerbutton">
+            <div class="left">
+                <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
+            </div>
+        </nav>
+    </div>
+    
     <h1>Explore NFTs</h1>
     <div class="container">
         {% for i in range(16) %}
         <div class="nft">
-            <img src="{{ image_urls[i] }}" alt="NFT iamge"> <br>
+            {% if image_urls[i] == "" %}
+            <img src="/static/nft.jpg" alt="NFT image"> <br>
+            {% else %}
+            <img src="{{ image_urls[i] }}" alt="NFT image"> <br>
+            {% endif %}
             <b>{{ collections[i] }}</b> <br>
-            <b>{{ names[i] }}</b>
+            {% if names[i] == None %}
+            <b># {{ token_ids[i] }}</b> <br>
+            {% else %}
+            <b>{{ names[i] }}</b> <br>
+            {% endif %}
+            <form action="/details" method="POST">
+                <b>Click to learn more about this NFT!</b>
+                <input type="hidden" name="contract_address" value="{{ contract_addresses[i] }}">
+                <input type="hidden" name="token_id" value="{{ token_ids[i] }}">
+                <input type="submit" value="Learn More">
+            </form>
         </div>
         {% endfor %}
     </div>
 </body>
 
 </html>
-<!---->
