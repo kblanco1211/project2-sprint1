@@ -2,10 +2,23 @@
 
 import os
 import flask
+from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
+from flask_login.utils import login_required
+
 from opensea import get_assets, get_single_asset
 
 app = flask.Flask(__name__)
+
+from dotenv import load_dotenv, find_dotenv
+from flask_login import (
+    login_user,
+    UserMixin,
+    LoginManager,
+    login_required,
+)
+
+load_dotenv(find_dotenv())
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -13,7 +26,48 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 db = SQLAlchemy(app)
 
+# db.create_all()
+# login_manager = LoginManager()
+# login_manager.login_view = "login"
+# login_manager.init_app(app)
 
+# @login_manager.user_loader
+# def load_user(user_name):
+#     return User.query.get(user_name)
+
+
+class User(UserMixin, db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+
+    def __repr__(self):
+        return f"<User {self.username}>"
+
+    def get_username(self):
+        """
+        Getter for username attribute
+        """
+        return self.username
+
+
+print("Hello")
+
+db.create_all()
+login_manager = LoginManager()
+login_manager.login_view = "login"
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_name):
+    """
+    Needed for login
+    """
+    return User.query.get(user_name)
+
+
+@login_required
 @app.route("/")
 def index():
     """App homepage"""
@@ -115,11 +169,51 @@ def login():
     return flask.render_template("login.html")
 
 
+@app.route("/login", methods=["POST"])
+def login_post():
+    """
+    Handler for login form data
+    """
+    username = flask.request.form.get("username")
+    user = User.query.filter_by(username=username).first()
+    if user:
+        login_user(user)
+        return flask.redirect(flask.url_for("bp.index"))
+
+    return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
+
+
+@app.route("/save", methods=["POST"])
 @app.route("/signup")
 def signup():
     """Sign up page"""
 
     return flask.render_template("signup.html")
+
+
+@app.route("/why")
+def why():
+    return flask.render_template("why.html")
+
+
+@app.route("/history")
+def history():
+    return flask.render_template("history.html")
+
+
+@app.route("/crypto")
+def crypto():
+    return flask.render_template("crypto.html")
+
+
+@app.route("/purchase")
+def purchase():
+    return flask.render_template("purchase.html")
+
+
+@app.route("/future")
+def future():
+    return flask.render_template("future.html")
 
 
 app.run(
