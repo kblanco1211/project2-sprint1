@@ -2,7 +2,7 @@
 import os
 import flask
 from flask import render_template,request,redirect
-from flask_login import login_required, current_user, login_user
+from flask_login import login_required, current_user, login_user, logout_user
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from models import UserModel,db,login
@@ -29,6 +29,7 @@ def create_all():
 @login_required
 def index():
     """App homepage"""
+    print("In index")
 
     return flask.render_template("index.html")
 
@@ -125,21 +126,21 @@ def saved():
 @app.route('/login', methods = ['POST','GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect('/index')
+        return redirect('/')
     if request.method == 'POST':
         email = request.form['email']
         user = UserModel.query.filter_by(email = email).first()
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
-            return redirect('/index')
-     
+            return redirect('/')
+
     return render_template('login.html')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/index')
+        return redirect('/')
      
     if request.method == 'POST':
         email = request.form['email']
@@ -153,8 +154,13 @@ def signup():
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        return redirect('/index')
+        return redirect('/')
     return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/login')
 
 
 @app.route("/why")

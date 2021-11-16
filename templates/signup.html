@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <form>
         <div class="container">
             <div class="row">
                 <div class="padded">
@@ -22,7 +21,7 @@
                     </div>
                 </div>
                 <div class="padded">
-                    <form action="/signup" method="POST">
+                    <form  method="POST" action="/signup">
                         <input type="email" name="email" placeholder="Email">
                         <input type = "text" name ="username" placeholder="Username">
                         <input type="password" name="password" placeholder="Password">
@@ -34,9 +33,7 @@
 
                 </div>
             </div>
-
         </div>
-    </form>
     <a href={{ url_for('login') }}>Log In</a>
 
 
