@@ -12,7 +12,7 @@ load_dotenv(find_dotenv())
 app = flask.Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://data.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
@@ -139,7 +139,7 @@ def login():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/index')
+        return redirect('/')
      
     if request.method == 'POST':
         email = request.form['email']
