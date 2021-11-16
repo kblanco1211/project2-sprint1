@@ -7,7 +7,6 @@ import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
-
 from flask_login.utils import login_required
 <<<<<<< HEAD
 
@@ -173,6 +172,7 @@ def login():
 def login_post():
     """Handler for login form data"""
     email = flask.request.form.get("email")
+    password = flask.request.form.get("password")
     user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
@@ -181,6 +181,7 @@ def login_post():
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 @app.route("/save", methods=["POST"])
 def save():
@@ -202,6 +203,13 @@ def save():
 
 =======
 >>>>>>> b2599f73058f5c281232e4f711f994c02e6a9d30
+=======
+@app.route("/signup", methods=["POST"])
+def signup_post():
+    return flask.render_template("/index.html")
+
+
+>>>>>>> 378b9a9145627513fb1dfa3c5043c860986e51fb
 @app.route("/signup")
 def signup():
     """Sign up page"""
