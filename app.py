@@ -1,48 +1,43 @@
-import flask
 import os
 from flask_sqlalchemy import SQLAlchemy
 from opensea import get_assets, get_single_asset
+import flask
 
-app = flask.Flask(__name__)
 
 from dotenv import load_dotenv, find_dotenv
 from flask_login import (
     login_user,
+    current_user,
     UserMixin,
     LoginManager,
     login_required,
 )
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv(find_dotenv())
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app = flask.Flask(__name__, static_folder="./build/static")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = b"I am a secret key"
 
 db = SQLAlchemy(app)
-
 
 class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-
-    def __repr__(self):
+user_name = db.Column(db.String(80), unique=True)
+def __repr__(self):
+        """
+        Determines what happens when we print an instance of the class
+        """
         return f"<User {self.username}>"
 
-    def get_username(self):
+def get_username(self):
         """
         Getter for username attribute
         """
         return self.username
-
-
-print("Hello")
-
-db.create_all()
-login_manager = LoginManager()
-login_manager.login_view = "login"
-login_manager.init_app(app)
-
 
 @login_manager.user_loader
 def load_user(user_name):
