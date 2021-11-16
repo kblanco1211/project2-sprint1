@@ -136,17 +136,6 @@ def login():
     return render_template('login.html')
 
 
-<<<<<<< HEAD
-    return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
-
-#@app.route("/save", methods=["POST"])
-#def save():
-
-
-@app.route("/signup", methods=["POST"])
-def signup_post():
-    return flask.render_template("/index.html")
-=======
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
@@ -171,7 +160,6 @@ def signup():
 def logout():
     logout_user()
     return redirect('/login')
->>>>>>> main
 
 
 @app.route("/why")
