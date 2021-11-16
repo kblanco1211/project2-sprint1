@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <title>NFTStache</title>
     <!-- Required meta tags -->
@@ -9,39 +10,36 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
 </head>
+
 <body>
-<form>
-    <div class="container">
-        <div class="row">
-            <div class="padded">
-                <h1>NFTStache</h1>
-                <div class="text-center">
-                    <p>Crafty info making users want to delve deeper</p>
+    <form>
+        <div class="container">
+            <div class="row">
+                <div class="padded">
+                    <h1>NFTStache</h1>
+                    <div class="text-center">
+                        <p>Your introduction into the world of NFTs.</p>
+                    </div>
+                </div>
+                <div class="padded">
+                    <form action="/login_user" method="POST">
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password">
+                        <input class="btn btn-primary" type="submit" value="Login">
+                    </form>
+
+                    <!-- <p><span class="psw">Forgot password?</span></p> -->
+                    <hr>
+                    <a type="button" href="/signup" class="btn btn-dark">Create new Account</a>
+
                 </div>
             </div>
-            <div class="padded">
-                <div>
-                    <input type="text" placeholder="Enter Email" name="email" required>
-                </div>
 
-                <div class="fom-cont">
-                    <input type="password" placeholder="Password" name="psw" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Login</button>
-
-                <!-- <p><span class="psw">Forgot password?</span></p> -->
-                <hr>
-                <a type="button" href="/signup" class="btn btn-dark">Create new Account</a>
-
-            </div>
         </div>
 
-    </div>
 
-
-</form>
+    </form>
 
 </body>
-</html>
 
+</html>
