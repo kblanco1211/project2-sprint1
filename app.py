@@ -136,8 +136,8 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/register', methods=['POST', 'GET'])
-def register():
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
     if current_user.is_authenticated:
         return redirect('/index')
      
