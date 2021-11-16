@@ -1,4 +1,3 @@
-
 """Main app file that contains flask server logic."""
 
 import os
@@ -7,14 +6,7 @@ from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_login.utils import login_required
-
-
 from opensea import get_assets, get_single_asset
-
-import flask
-
-
-
 from dotenv import load_dotenv, find_dotenv
 from flask_login import (
     login_user,
@@ -27,46 +19,46 @@ from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__, static_folder="./build/static")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app = flask.Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-
 db = SQLAlchemy(app)
+
 
 class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-user_name = db.Column(db.String(80), unique=True)
-def __repr__(self):
-        """
-        Determines what happens when we print an instance of the class
-        """
-        return f"<User {self.username}>"
+    email = db.Column(db.String(80))
 
-def get_username(self):
-        """
-        Getter for username attribute
-        """
-        return self.username
-        
-if os.getenv("DATABASE_URL") is not None:  # so unit tests run in GitHub
-    db.create_all()
+    def __repr__(self):
+        return f"<User {self.email}>"
+
+    def get_email(self):
+        """Getter for username attribute"""
+        return self.email
+
+
+db.create_all()
+
 login_manager = LoginManager()
-login_manager.login_view = "login"
 login_manager.init_app(app)
+login_manager.login_view = "login"
+
 
 @login_manager.user_loader
-def load_user(user_name):
-    """
-    Needed for login
-    """
-    return User.query.get(user_name)
+def load_user(user_id):
+    """Needed for login"""
+    return User.query.get(user_id)
 
 
-@login_required
+print("test")
+
+
 @app.route("/")
+@login_required
 def index():
     """App homepage"""
 
@@ -74,6 +66,7 @@ def index():
 
 
 @app.route("/explore")
+@login_required
 def explore():
     """Route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details."""
 
@@ -93,6 +86,7 @@ def explore():
 
 
 @app.route("/details", methods=["POST"])
+@login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
 
@@ -154,6 +148,7 @@ def save_nft():
 
 
 @app.route("/saved")
+@login_required
 def saved():
     """Route that displays a user's displayed NFTs."""
 
@@ -167,13 +162,11 @@ def login():
     return flask.render_template("login.html")
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login_user", methods=["POST"])
 def login_post():
-    """
-    Handler for login form data
-    """
-    username = flask.request.form.get("username")
-    user = User.query.filter_by(username=username).first()
+    """Handler for login form data"""
+    email = flask.request.form.get("email")
+    user = User.query.filter_by(email=email).first()
     if user:
         login_user(user)
         return flask.redirect(flask.url_for("bp.index"))
@@ -181,7 +174,6 @@ def login_post():
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
 
 
-@app.route("/save", methods=["POST"])
 @app.route("/signup")
 def signup():
     """Sign up page"""
