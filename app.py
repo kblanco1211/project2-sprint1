@@ -9,20 +9,18 @@ from models import UserModel,db,login
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__,static_folder="./build/static")
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.sqlite3'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-db.init_app(app)
-login.init_app(app)
-login.login_view = 'login'
- 
-@app.before_first_request
-def create_all():
+if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
     db.create_all()
+login.init_app(app)
+login.int_app(app)
+login.login_view = "login"
 
 
 @app.route("/")
@@ -185,25 +183,6 @@ def purchase():
 @app.route("/future")
 def future():
     return flask.render_template("future.html")
-
-@app.route("/wallets")
-def wallets():
-    return flask.render_template("wallets.html")
-
-@app.route("/ethereum")
-def ethereum():
-    return flask.render_template("ethereum.html")
-
-@app.route("/polygon")
-def polygon():
-    return flask.render_template("polygon.html")
-
-@app.route("/klaytn")
-def klaytn():
-    return flask.render_template("klaytn.html")
-
-
-
 
 
 app.run(
