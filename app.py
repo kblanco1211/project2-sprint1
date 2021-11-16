@@ -1,15 +1,8 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
-<<<<<<< HEAD
-from flask_login import login_manager
-from flask_sqlalchemy import SQLAlchemy
-from flask_login.utils import login_required
-
-=======
 from flask import render_template,request,redirect
 from flask_login import login_required, current_user, login_user, logout_user
->>>>>>> main
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from models import UserModel,db,login
