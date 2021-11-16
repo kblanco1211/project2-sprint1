@@ -1,5 +1,7 @@
-import flask
+"""Main app file that contains flask server logic."""
+
 import os
+import flask
 from flask_sqlalchemy import SQLAlchemy
 from opensea import get_assets, get_single_asset
 
@@ -14,12 +16,15 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
+    """App homepage"""
+
     return flask.render_template("index.html")
 
 
-# route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details
 @app.route("/explore")
 def explore():
+    """Route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details."""
+
     assets = get_assets()
 
     if assets == "error":
@@ -35,9 +40,10 @@ def explore():
     )
 
 
-# route that displays and explains the details of a chosen NFT
 @app.route("/details", methods=["POST"])
 def details():
+    """Route that displays and explains the details of a chosen NFT."""
+
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
@@ -62,9 +68,10 @@ def details():
     )
 
 
-# route that saves an NFT to a user's list of saved NFTs
 @app.route("/save_nft", methods=["POST"])
 def save_nft():
+    """Route that saves an NFT to a user's list of saved NFTs"""
+
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
 
@@ -94,20 +101,27 @@ def save_nft():
     )
 
 
-# route that displays a user's displayed NFTs
 @app.route("/saved")
 def saved():
+    """Route that displays a user's displayed NFTs."""
+
     return flask.render_template("saved.html")
 
 
 @app.route("/login")
 def login():
+    """Login page"""
+
     return flask.render_template("login.html")
 
 
 @app.route("/signup")
 def signup():
+    """Sign up page"""
+
     return flask.render_template("signup.html")
 
 
-app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True)
+app.run(
+    host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
+)
