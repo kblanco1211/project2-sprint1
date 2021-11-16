@@ -12,17 +12,17 @@ load_dotenv(find_dotenv())
 app = flask.Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.data.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-
-
-if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
-    db.create_all()
 db.init_app(app)
 login.init_app(app)
-login.login_view = "login"
+login.login_view = 'login'
+ 
+@app.before_first_request
+def create_all():
+    db.create_all()
 
 
 @app.route("/")
@@ -122,7 +122,7 @@ def saved():
 
     return flask.render_template("saved.html")
 
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/login', methods = ['POST','GET'])
 def login():
     if current_user.is_authenticated:
         return redirect('/index')
@@ -136,7 +136,7 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
         return redirect('/index')
