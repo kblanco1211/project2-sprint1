@@ -1,66 +1,42 @@
 """Main app file that contains flask server logic."""
-
 import os
 import flask
+<<<<<<< HEAD
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
 from flask_login.utils import login_required
 
+=======
+from flask import render_template,request,redirect
+from flask_login import login_required, current_user, login_user, logout_user
+>>>>>>> main
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
-from flask_login import (
-    login_user,
-    current_user,
-    UserMixin,
-    LoginManager,
-    login_required,
-)
-from flask_sqlalchemy import SQLAlchemy
+from models import UserModel,db,login
 
 load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-db = SQLAlchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///users.sqlite3'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-class User(UserMixin, db.Model):
-
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(80))
-
-    def __repr__(self):
-        return f"<User {self.email}>"
-
-    def get_email(self):
-        """Getter for username attribute"""
-        return self.email
-
-
-db.create_all()
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """Needed for login"""
-    return User.query.get(user_id)
-
-
-print("test")
+db.init_app(app)
+login.init_app(app)
+login.login_view = 'login'
+ 
+@app.before_first_request
+def create_all():
+    db.create_all()
 
 
 @app.route("/")
 @login_required
 def index():
     """App homepage"""
+    print("In index")
 
     return flask.render_template("index.html")
 
@@ -86,7 +62,6 @@ def explore():
 
 
 @app.route("/details", methods=["POST"])
-@login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
 
@@ -154,24 +129,21 @@ def saved():
 
     return flask.render_template("saved.html")
 
-
-@app.route("/login")
+@app.route('/login', methods = ['POST','GET'])
 def login():
-    """Login page"""
+    if current_user.is_authenticated:
+        return redirect('/')
+    if request.method == 'POST':
+        email = request.form['email']
+        user = UserModel.query.filter_by(email = email).first()
+        if user is not None and user.check_password(request.form['password']):
+            login_user(user)
+            return redirect('/')
 
-    return flask.render_template("login.html")
+    return render_template('login.html')
 
 
-@app.route("/login_user", methods=["POST"])
-def login_post():
-    """Handler for login form data"""
-    email = flask.request.form.get("email")
-    password = flask.request.form.get("password")
-    user = User.query.filter_by(email=email).first()
-    if user:
-        login_user(user)
-        return flask.redirect(flask.url_for("bp.index"))
-
+<<<<<<< HEAD
     return flask.jsonify({"status": 401, "reason": "Username or Password Error"})
 
 #@app.route("/save", methods=["POST"])
@@ -181,6 +153,32 @@ def login_post():
 @app.route("/signup", methods=["POST"])
 def signup_post():
     return flask.render_template("/index.html")
+=======
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect('/')
+     
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+ 
+        if UserModel.query.filter_by(email=email).first():
+            return ('Email already Present')
+             
+        user = UserModel(email=email, username=username)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/')
+    return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/login')
+>>>>>>> main
 
 
 @app.route("/why")
