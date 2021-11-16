@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
     db.create_all()
 login.init_app(app)
-login.int_app(app)
+
 login.login_view = "login"
 print("Hello")
 
