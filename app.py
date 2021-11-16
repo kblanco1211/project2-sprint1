@@ -10,20 +10,17 @@ from models import UserModel,db,login
 load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
+
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = '_5#y2L"F4Q8z\n\xec]/'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-
-
-db.init_app(app)
-login.init_app(app)
-login.login_view = 'login'
-
-@app.before_first_request
-def create_all():
+if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
     db.create_all()
+login.login_view = "login"
+login.init_app(app)
 
 @app.route("/")
 @login_required
