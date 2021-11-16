@@ -10,11 +10,11 @@ from models import UserModel,db,login
 load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
-
-
-app.config["SQLALCHEMY_DATABASE_URI"] =  os.getenv("DATABASE_URL")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+app.config["SQLALCHEMY_DATABASE_URI"] =  os.getenv("SQLALCHEMY_DATABASE_URI")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 
 if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
