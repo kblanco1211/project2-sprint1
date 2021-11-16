@@ -3,16 +3,18 @@ import os
 import flask
 from flask import render_template, request, redirect
 from flask_login import (
+    LoginManager,
     login_manager,
     login_required,
     current_user,
     login_user,
     logout_user,
+    UserMixin,
 )
 from flask_sqlalchemy import SQLAlchemy
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
-from models import UserModel, db, login
+from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv(find_dotenv())
 
@@ -23,14 +25,42 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-login.init_app(app)
-login.login_view = "login"
-print("Hello")
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True)
+    username = db.Column(db.String(100))
+    password_hash = db.Column(db.String())
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+class NFTsave(db.Model):
+    __tablename__ = "nftsaved"
+    id = db.Column(db.Integer, primary_key=True)
+    contract_address = db.Column(db.String(80), nullable=False)
+    token_id = db.Column(db.String(80), nullable=False)
+
+    def get_assets(self, token_id):
+        return get_single_asset(self.contract_address, token_id)
+
+
+db.create_all()
 
 
 @login_manager.user_loader
 def load_user(id):
-    return UserModel.query.get(int(id))
+    return User.query.get(int(id))
 
 
 @app.route("/")
@@ -137,7 +167,7 @@ def login():
         return redirect("/")
     if request.method == "POST":
         email = request.form["email"]
-        user = UserModel.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
             return redirect("/")
@@ -155,10 +185,10 @@ def signup():
         username = request.form["username"]
         password = request.form["password"]
 
-        if UserModel.query.filter_by(email=email).first():
+        if User.query.filter_by(email=email).first():
             return "Email already Present"
 
-        user = UserModel(email=email, username=username)
+        user = User(email=email, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
@@ -217,6 +247,7 @@ def klaytn():
     return flask.render_template("klaytn.html")
 
 
-app.run(
-    host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
-)
+if __name__ == "__main__":
+    app.run(
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
+    )
