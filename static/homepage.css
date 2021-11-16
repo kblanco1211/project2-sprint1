@@ -63,12 +63,15 @@ a.btnStack:hover {
 #body {
     padding: 10px;			
 }
+
 h1{
     text-align: center;
 }
+
 .center{
     text-align: center;
 }
+
 #middleblock{
     height: auto;
     width: 500;

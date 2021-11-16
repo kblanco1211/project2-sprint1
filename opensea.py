@@ -1,8 +1,12 @@
-import requests
-import random
+"""Contains all opensea api logic"""
 
-# information for several NFTs are returned by this function, and it is used to display information on the explore NFTs page
+import random
+import requests
+
+
 def get_assets():
+    """Information for several NFTs are returned by this function, and it is used to display information on the explore NFTs page"""
+
     # lists that will be returned that store information obtained from the api call
     image_urls = []
     names = []
@@ -18,6 +22,12 @@ def get_assets():
         "cryptopunks",
         "mutant-ape-yacht-club",
         "edifice-by-ben-kovach",
+        "cool-cats-nft",
+        "lilbabyapeclub",
+        "doodles-official",
+        "cryptoadz-by-gremplin",
+        "cyberkongz",
+        "mekaverse",
     ]
     i = random.randrange(len(collection_slugs))
     params = {"limit": 16, "collection": collection_slugs[i]}
@@ -34,16 +44,13 @@ def get_assets():
             names.append(response_json["assets"][i]["name"])
             try:
                 collections.append(response_json["assets"][i]["collection"]["name"])
-            except:
+            except Exception:
                 collections.append(None)
             contract_addresses.append(
                 response_json["assets"][i]["asset_contract"]["address"]
             )
             token_ids.append(response_json["assets"][i]["token_id"])
-
-        print("success")
-    except:
-        print("error")
+    except Exception:
         return "error"
 
     return {
@@ -55,9 +62,12 @@ def get_assets():
     }
 
 
-# function takes in an NFT's contract address and token id and uses them to make an opensea api call that returns information for that NFT
-# the information returned from this function is used to display on the details page
 def get_single_asset(contract_address, token_id):
+    """
+    function takes in an NFT's contract address and token id and uses them to make an opensea api call that returns information for that NFT
+    the information returned from this function is used to display on the details page
+    """
+
     # url link used to make the opensea retrieve single asset api call
     url = f"https://api.opensea.io/api/v1/asset/{contract_address}/{token_id}/"
 
@@ -73,26 +83,24 @@ def get_single_asset(contract_address, token_id):
         description = response_json["description"]
         try:
             creator = response_json["creator"]["user"]["username"]
-        except:
+        except Exception:
             creator = None
         try:
             string_price = response_json["orders"][0]["current_price"]
             price = round(int(string_price) * 0.000000000000000001, 3)
-        except:
+        except Exception:
             price = None
         try:
             crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
-        except:
+        except Exception:
             crypto = None
         trait_types = []
         traits = []
         for i in range(len(response_json["traits"])):
             trait_types.append(response_json["traits"][i]["trait_type"])
             traits.append(response_json["traits"][i]["value"])
-    except:
+    except Exception:
         return "error"
-
-    print(response_json["collection"]["slug"])
 
     # information on the given NFT is returned
     return {
@@ -109,7 +117,3 @@ def get_single_asset(contract_address, token_id):
         "contract_address": contract_address,
         "token_id": token_id,
     }
-
-
-get_assets()
-get_single_asset("0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270", "204000405")

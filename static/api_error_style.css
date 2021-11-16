@@ -1,0 +1,13 @@
+body {
+    font-family: Arial;
+    text-align: center;
+}
+
+.error_image {
+    height: 200px;
+    width: 200px;
+}
+
+h2 {
+    font-size: 40px;
+}

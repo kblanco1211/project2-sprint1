@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <title>Error Page</title>
+    <link rel="stylesheet" href="/static/api_error_style.css">
+</head>
+
+<body>
+    <br>
+    <img class="error_image" src="/static/sad_face.png" alt="error image">
+    <h2>SOMETHING WENT WRONG</h2>
+    {% if error == "explore" %}
+    <p>An error occurred while trying to retrieve NFTs.</p>
+    {% else %}
+    <p>An error occurred while trying to retrieve the details for this NFT.</p>
+    {% endif %}
+</body>
+
+</html>

@@ -9,8 +9,28 @@
     <div class="container">
         <div class="left">
             <div class="nft">
-                <img src="{{ image_url }}"> <br><br>
-                <button class="save">Save NFT</button> <br><br>
+                {% if image_url == "" %}
+                <img src="/static/nft.jpg" alt="NFT image"> <br><br>
+                {% else %}
+                <img src="{{ image_url }}" alt="NFT image"> <br><br>
+                {% endif %}
+
+                <form action="/save_nft" method="POST">
+                    <input type="hidden" name="contract_address" value="{{ contract_address }}">
+                    <input type="hidden" name="token_id" value="{{ token_id }}">
+                    <input type="submit" value="Save NFT">
+                </form> <br>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <br><br>
             </div>
 
             {% if name == None %}
@@ -27,7 +47,21 @@
                 <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
                 <div class="dropdown-content">
                     <ul>
-                        <li>Explanation/Context</li>
+                        <li>
+                            <b class="explanation">
+                                The owner of an NFT sets the price that it well sell for. This price can be fixed, or
+                                the owner can choose to allow people to bid on the NFT.
+                            </b>
+                        </li>
+                        <li>
+                            <b class="explanation">
+                                NFTs can only be bought with cryptocurrency, and the specific crypto is almost always
+                                Ethereum. Click here to learn more about crypto & Ethereum
+                            </b>
+                            <form action="/crypto">
+                                <input type="submit" value="Crypto">
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div> <br><br>
