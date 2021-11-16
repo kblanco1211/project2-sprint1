@@ -38,6 +38,12 @@ def get_username(self):
         Getter for username attribute
         """
         return self.username
+        
+if os.getenv("DATABASE_URL") is not None:  # so unit tests run in GitHub
+    db.create_all()
+login_manager = LoginManager()
+login_manager.login_view = "login"
+login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_name):
