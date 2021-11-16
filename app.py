@@ -16,12 +16,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] =  os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-
-if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
-        db.create_all()
 db.init_app(app)
 login.init_app(app)
-login.login_view = "login"
+login.login_view = 'login'
+ 
+@app.before_first_request
+def create_all():
+    db.create_all()
 
 @app.route("/")
 @login_required

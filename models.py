@@ -20,7 +20,7 @@ class UserModel(UserMixin, db.Model):
      
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
-class NFTsave(db.Model):
+#class NFTsave(db.Model):
     __tablename__= 'nftsaved'
     id = db.Column(db.Integer, primary_key=True)
     contract_address = db.Column(db.String(80), nullable=False)
