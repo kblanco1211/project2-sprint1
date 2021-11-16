@@ -124,7 +124,7 @@ def saved():
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect('/index')
+        return redirect('/explore')
      
     if request.method == 'POST':
         email = request.form['email']
