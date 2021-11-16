@@ -55,7 +55,6 @@ def explore():
 
 
 @app.route("/details", methods=["POST"])
-@login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
 
