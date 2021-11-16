@@ -10,13 +10,26 @@
     <div class="container">
         {% for i in range(16) %}
         <div class="nft">
-            <img src="{{ image_urls[i] }}" alt="NFT iamge"> <br>
+            {% if image_urls[i] == "" %}
+            <img src="/static/nft.jpg" alt="NFT image"> <br>
+            {% else %}
+            <img src="{{ image_urls[i] }}" alt="NFT image"> <br>
+            {% endif %}
             <b>{{ collections[i] }}</b> <br>
-            <b>{{ names[i] }}</b>
+            {% if names[i] == None %}
+            <b># {{ token_ids[i] }}</b> <br>
+            {% else %}
+            <b>{{ names[i] }}</b> <br>
+            {% endif %}
+            <form action="/details" method="POST">
+                <b>Click to learn more about this NFT!</b>
+                <input type="hidden" name="contract_address" value="{{ contract_addresses[i] }}">
+                <input type="hidden" name="token_id" value="{{ token_ids[i] }}">
+                <input type="submit" value="Learn More">
+            </form>
         </div>
         {% endfor %}
     </div>
 </body>
 
 </html>
-<!---->

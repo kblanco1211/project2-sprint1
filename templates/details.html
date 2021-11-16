@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <title>NFTStache</title>
+    <link href="/static/details_style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="nft">
+                {% if image_url == "" %}
+                <img src="/static/nft.jpg" alt="NFT image"> <br><br>
+                {% else %}
+                <img src="{{ image_url }}" alt="NFT image"> <br><br>
+                {% endif %}
+
+                <form action="/save_nft" method="POST">
+                    <input type="hidden" name="contract_address" value="{{ contract_address }}">
+                    <input type="hidden" name="token_id" value="{{ token_id }}">
+                    <input type="submit" value="Save NFT">
+                </form> <br>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <br><br>
+            </div>
+
+            {% if name == None %}
+            <b class="name"> # {{ token_id }}</b> <br>
+            {% else %}
+            <b class="name"> {{ name }}</b> <br>
+            {% endif %}
+            <b>Created By: {{ creator }}</b> <br>
+            <b>Description: {{ description }}</b> <br><br>
+        </div>
+
+        <div class="right">
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>
+                            <b class="explanation">
+                                The owner of an NFT sets the price that it well sell for. This price can be fixed, or
+                                the owner can choose to allow people to bid on the NFT.
+                            </b>
+                        </li>
+                        <li>
+                            <b class="explanation">
+                                NFTs can only be bought with cryptocurrency, and the specific crypto is almost always
+                                Ethereum. Click here to learn more about crypto & Ethereum
+                            </b>
+                            <form action="/crypto">
+                                <input type="submit" value="Crypto">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Collection: {{ collection }}</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>{{ collection_description }}</li>
+                        <li>
+                            <b class="explanation">
+                                NFTs are sometimes part of a collection, where NFTs in a collection share the same
+                                traits. It could be analogized to trading cards where Pokemon and Yu-Gi-Oh would be
+                                their own collections.
+                            </b>
+                        </li>
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Traits</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        {% for i in range(trait_types|length) %}
+                        <li><span style="color:green">{{ trait_types[i] }}</span>: <span style="color:blue">{{
+                                traits[i] }}</span></li>
+                        {% endfor %}
+                        <li>
+                            <b class="explanation">
+                                A collection of NFTs has its own set of trait types and they are shown in green above.
+                                Within each type, the NFT will have a specific trait of thatt type which is shown in
+                                blue above.
+                                NFTs in a collection are usually randomly designated traits, and NFTs within a
+                                collection are rarer when they have specific traits that many others in the collection
+                                don't have.
+                            </b>
+                        </li>
+                    </ul>
+                </div>
+            </div> <br><br>
+
+            <div class="dropdown">
+                <button class="dropbtn"><b><u>Details</u></b></button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>Contract Address: {{contract_address}}</li>
+                        <li>Token ID: {{token_id}}</li>
+                        <li>
+                            <b class="explanation">
+                                The contract address of an NFT refers to the unique address where the contract is
+                                deployed on the Ethereum block chain.
+                                A contract is needed to make an NFT a part of the blockchain, and they assign ownership
+                                and manage the transferibility of an NFT.
+                            </b>
+                        </li>
+                        <li>
+                            <b class="explanation">
+                                The token ID of an NFT is used to uniquely identify the NFT. The token ID and the
+                                contract address make up a globally unique and fully-qualified identifier for the NFT.
+                            </b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

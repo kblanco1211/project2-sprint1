@@ -1,7 +1,12 @@
+"""Contains all opensea api logic"""
+
+import random
 import requests
 
-# information for several NFTs are returned by this function, and it is used to display information on the explore NFTs page
+
 def get_assets():
+    """Information for several NFTs are returned by this function, and it is used to display information on the explore NFTs page"""
+
     # lists that will be returned that store information obtained from the api call
     image_urls = []
     names = []
@@ -12,7 +17,20 @@ def get_assets():
     # url link and parameters used to make an opensea retrieve assets api call
     # the api call returns information for individual NFTs or assets the amount of assets returned is given by the parameters
     url = "https://api.opensea.io/api/v1/assets"
-    params = {"limit": 16}
+    collection_slugs = [
+        "boredapeyachtclub",
+        "cryptopunks",
+        "mutant-ape-yacht-club",
+        "edifice-by-ben-kovach",
+        "cool-cats-nft",
+        "lilbabyapeclub",
+        "doodles-official",
+        "cryptoadz-by-gremplin",
+        "cyberkongz",
+        "mekaverse",
+    ]
+    i = random.randrange(len(collection_slugs))
+    params = {"limit": 16, "collection": collection_slugs[i]}
 
     # try except is to account for if there is an error when making the api call
     try:
@@ -26,13 +44,13 @@ def get_assets():
             names.append(response_json["assets"][i]["name"])
             try:
                 collections.append(response_json["assets"][i]["collection"]["name"])
-            except:
+            except Exception:
                 collections.append(None)
             contract_addresses.append(
                 response_json["assets"][i]["asset_contract"]["address"]
             )
             token_ids.append(response_json["assets"][i]["token_id"])
-    except:
+    except Exception:
         return "error"
 
     return {
@@ -44,9 +62,12 @@ def get_assets():
     }
 
 
-# function takes in an NFT's contract address and token id and uses them to make an opensea api call that returns information for that NFT
-# the information returned from this function is used to display on the details page
 def get_single_asset(contract_address, token_id):
+    """
+    function takes in an NFT's contract address and token id and uses them to make an opensea api call that returns information for that NFT
+    the information returned from this function is used to display on the details page
+    """
+
     # url link used to make the opensea retrieve single asset api call
     url = f"https://api.opensea.io/api/v1/asset/{contract_address}/{token_id}/"
 
@@ -57,28 +78,41 @@ def get_single_asset(contract_address, token_id):
 
         image_url = response_json["image_url"]
         name = response_json["name"]
-        collection_name = response_json["collection"]["name"]
+        collection = response_json["collection"]["name"]
+        collection_description = response_json["collection"]["description"]
         description = response_json["description"]
-        creator = response_json["creator"]["user"]["username"]
+        try:
+            creator = response_json["creator"]["user"]["username"]
+        except Exception:
+            creator = None
         try:
             string_price = response_json["orders"][0]["current_price"]
             price = round(int(string_price) * 0.000000000000000001, 3)
-        except:
+        except Exception:
             price = None
-        crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
-        traits = response_json["traits"]
-    except:
+        try:
+            crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
+        except Exception:
+            crypto = None
+        trait_types = []
+        traits = []
+        for i in range(len(response_json["traits"])):
+            trait_types.append(response_json["traits"][i]["trait_type"])
+            traits.append(response_json["traits"][i]["value"])
+    except Exception:
         return "error"
 
     # information on the given NFT is returned
     return {
         "image_url": image_url,
         "name": name,
-        "collection_name": collection_name,
+        "collection": collection,
+        "collection_description": collection_description,
         "description": description,
         "creator": creator,
         "price": price,
         "crypto": crypto,
+        "trait_types": trait_types,
         "traits": traits,
         "contract_address": contract_address,
         "token_id": token_id,
