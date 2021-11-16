@@ -1,63 +1,71 @@
+<<<<<<< HEAD
+=======
 """Main app file that contains flask server logic."""
 
+>>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
+
 from flask_login.utils import login_required
 
+
+=======
+from flask_login.utils import login_required
+
+>>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 from opensea import get_assets, get_single_asset
 
-app = flask.Flask(__name__)
+import flask
+
+
 
 from dotenv import load_dotenv, find_dotenv
 from flask_login import (
     login_user,
+    current_user,
     UserMixin,
     LoginManager,
     login_required,
 )
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv(find_dotenv())
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+app = flask.Flask(__name__, static_folder="./build/static")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+<<<<<<< HEAD
+app.secret_key = b"I am a secret key"
+=======
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+>>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 
 db = SQLAlchemy(app)
-
-# db.create_all()
-# login_manager = LoginManager()
-# login_manager.login_view = "login"
-# login_manager.init_app(app)
-
-# @login_manager.user_loader
-# def load_user(user_name):
-#     return User.query.get(user_name)
-
 
 class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-
-    def __repr__(self):
+user_name = db.Column(db.String(80), unique=True)
+def __repr__(self):
+        """
+        Determines what happens when we print an instance of the class
+        """
         return f"<User {self.username}>"
 
-    def get_username(self):
+def get_username(self):
         """
         Getter for username attribute
         """
         return self.username
-
-
-print("Hello")
-
-db.create_all()
+        
+if os.getenv("DATABASE_URL") is not None:  # so unit tests run in GitHub
+    db.create_all()
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
-
 
 @login_manager.user_loader
 def load_user(user_name):
