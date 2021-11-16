@@ -1,21 +1,10 @@
-<<<<<<< HEAD
-=======
-"""Main app file that contains flask server logic."""
-
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 import os
 import flask
 from flask_login import login_manager
 from flask_sqlalchemy import SQLAlchemy
-<<<<<<< HEAD
 
 from flask_login.utils import login_required
 
-
-=======
-from flask_login.utils import login_required
-
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 from opensea import get_assets, get_single_asset
 
 import flask
@@ -37,11 +26,7 @@ load_dotenv(find_dotenv())
 app = flask.Flask(__name__, static_folder="./build/static")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-<<<<<<< HEAD
-app.secret_key = b"I am a secret key"
-=======
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
->>>>>>> 9346bebad98eadf2bd9fc89d29d97479559f9e0a
 
 db = SQLAlchemy(app)
 
@@ -192,6 +177,23 @@ def login_post():
 
 
 @app.route("/save", methods=["POST"])
+def save():
+    artist_ids = flask.request.json.get("artist_ids")
+    valid_ids = set()
+    for artist_id in artist_ids:
+        try:
+            access_token = get_access_token()
+            get_song_data(artist_id, access_token)
+            valid_ids.add(artist_id)
+        except KeyError:
+            pass
+
+    username = current_user.username
+    update_db_ids_for_user(username, valid_ids)
+
+    response = {"artist_ids": [a for a in artist_ids if a in valid_ids]}
+    return flask.jsonify(response)
+
 @app.route("/signup")
 def signup():
     """Sign up page"""
