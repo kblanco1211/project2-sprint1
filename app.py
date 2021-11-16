@@ -1,11 +1,11 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
-from flask import render_template,request,redirect
+from flask import render_template, request, redirect
 from flask_login import login_required, current_user, login_user, logout_user
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
-from models import UserModel,db,login
+from models import UserModel, db, login
 
 load_dotenv(find_dotenv())
 
@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 if os.getenv("DATABASE_URL") is not None:  # so our unit tests run in GitHub
     db.create_all()
 login.init_app(app)
-login.int_app(app)
+
 login.login_view = "login"
 print("Hello")
 
@@ -120,44 +120,46 @@ def saved():
 
     return flask.render_template("saved.html")
 
-@app.route('/login', methods = ['POST','GET'])
+
+@app.route("/login", methods=["POST", "GET"])
 def login():
     if current_user.is_authenticated:
-        return redirect('/')
-    if request.method == 'POST':
-        email = request.form['email']
-        user = UserModel.query.filter_by(email = email).first()
-        if user is not None and user.check_password(request.form['password']):
+        return redirect("/")
+    if request.method == "POST":
+        email = request.form["email"]
+        user = UserModel.query.filter_by(email=email).first()
+        if user is not None and user.check_password(request.form["password"]):
             login_user(user)
-            return redirect('/')
+            return redirect("/")
 
-    return render_template('login.html')
+    return render_template("login.html")
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route("/signup", methods=["POST", "GET"])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/')
-     
-    if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
- 
+        return redirect("/")
+
+    if request.method == "POST":
+        email = request.form["email"]
+        username = request.form["username"]
+        password = request.form["password"]
+
         if UserModel.query.filter_by(email=email).first():
-            return ('Email already Present')
-             
+            return "Email already Present"
+
         user = UserModel(email=email, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        return redirect('/')
-    return render_template('signup.html')
+        return redirect("/")
+    return render_template("signup.html")
 
-@app.route('/logout')
+
+@app.route("/logout")
 def logout():
     logout_user()
-    return redirect('/login')
+    return redirect("/login")
 
 
 @app.route("/why")
@@ -183,6 +185,26 @@ def purchase():
 @app.route("/future")
 def future():
     return flask.render_template("future.html")
+
+
+@app.route("/wallets")
+def wallets():
+    return flask.render_template("wallets.html")
+
+
+@app.route("/ethereum")
+def ethereum():
+    return flask.render_template("ethereum.html")
+
+
+@app.route("/polygon")
+def polygon():
+    return flask.render_template("polygon.html")
+
+
+@app.route("/klaytn")
+def klaytn():
+    return flask.render_template("klaytn.html")
 
 
 app.run(
