@@ -122,14 +122,14 @@ def saved():
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect('/explore')
+        return redirect('/index')
      
     if request.method == 'POST':
         email = request.form['email']
         user = UserModel.query.filter_by(email = email).first()
         if user is not None and user.check_password(request.form['password']):
             login_user(user)
-            return redirect('/explore')
+            return redirect('/index')
      
     return render_template('login.html')
 
@@ -137,7 +137,7 @@ def login():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/explore')
+        return redirect('/index')
      
     if request.method == 'POST':
         email = request.form['email']
@@ -151,7 +151,7 @@ def signup():
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        return redirect('/explore')
+        return redirect('/index')
     return render_template('signup.html')
 
 
