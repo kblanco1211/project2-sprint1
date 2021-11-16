@@ -6,6 +6,14 @@
 </head>
 
 <body>
+    <div id=navigation class="cell small-12 medium-12 large-12">
+        <nav class="centerbutton">
+            <div class="left">
+                <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
+            </div>
+        </nav>
+    </div>
+    
     <h1>Explore NFTs</h1>
     <div class="container">
         {% for i in range(16) %}

@@ -81,3 +81,48 @@ img {
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #356eb8;}
+
+.btnStack {
+  font-family: monospace;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+a.btnStack:hover {
+  background-color: #000;
+}
+
+.left1{
+  float: left
+  
+}
+.centerbutton{
+  margin: 8px;
+}
+
+#navigation{
+  height: 50px;
+  width: auto;
+  background: lightblue;
+}
+.cell {
+  border: 1px solid black;
+}
