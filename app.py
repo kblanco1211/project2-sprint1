@@ -51,6 +51,9 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+print("test")
+
+
 @app.route("/")
 @login_required
 def index():
