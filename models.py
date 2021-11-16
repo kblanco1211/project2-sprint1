@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from opensea import get_assets, get_single_asset
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
  
@@ -19,6 +20,14 @@ class UserModel(UserMixin, db.Model):
      
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
+class NFTsave(db.model):
+    __tablename__= 'nftsaved'
+    id = db.Column(db.Integer, primary_key=True)
+    contract_address = db.Column(db.String(80), nullable=False)
+    token_id = db.Column(db.String(80), nullable=False)
+
+    def get_assets(self,token_id):    
+        return get_single_asset(self.contract_address, token_id)
  
  
 @login.user_loader
