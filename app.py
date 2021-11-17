@@ -1,6 +1,11 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
+<<<<<<< HEAD
+from flask import render_template,request,redirect
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_required, current_user, login_user, logout_user, LoginManager, UserMixin
+=======
 from flask import render_template, request, redirect
 from flask_login import (
     LoginManager,
@@ -12,6 +17,7 @@ from flask_login import (
     UserMixin,
 )
 from flask_sqlalchemy import SQLAlchemy
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,6 +51,38 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
 
+<<<<<<< HEAD
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+class UserModel(UserMixin, db.Model):
+    __tablename__ = 'users'
+ 
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True)
+    username = db.Column(db.String(100))
+    password_hash = db.Column(db.String())
+
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+        
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
+class NFTsave(db.Model):
+    __tablename__= 'nfts'
+    id = db.Column(db.Integer, primary_key=True)
+    contract_address = db.Column(db.String(200), nullable=False)
+    token_id = db.Column(db.String(200), nullable=False)
+    username = db.Column(db.String(100))
+
+db.create_all()
+
+@login_manager.user_loader
+def load_user(id):
+    return UserModel.query.get(int(id))    
+=======
 class NFTsave(db.Model):
     __tablename__ = "nftsaved"
     id = db.Column(db.Integer, primary_key=True)
@@ -61,6 +99,7 @@ db.create_all()
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
 
 @app.route("/")
@@ -95,14 +134,14 @@ def explore():
 @app.route("/details", methods=["POST"])
 def details():
     """Route that displays and explains the details of a chosen NFT."""
-
+    print("1")
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
-
+    print("2")
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
-
+    print("3")
     return flask.render_template(
         "details.html",
         image_url=asset_details["image_url"],
@@ -123,11 +162,17 @@ def details():
 @app.route("/save_nft", methods=["POST"])
 def save_nft():
     """Route that saves an NFT to a user's list of saved NFTs"""
+    
 
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
 
-    # add logic to add NFT to saved NFT table
+    username = current_user.username
+    NFT = NFTsave(
+        contract_address=contract_address, token_id=token_id, username=username
+    )
+    db.session.add(NFT)
+    db.session.commit()
 
     flask.flash("NFT has been successfully saved")
 
@@ -157,8 +202,9 @@ def save_nft():
 @login_required
 def saved():
     """Route that displays a user's displayed NFTs."""
-
-    return flask.render_template("saved.html")
+    savednfts = NFTsave.query.filter_by(username = current_user.username).all()
+    print(savednfts)
+    return flask.render_template("saved.html", savednfts=savednfts)
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -170,7 +216,14 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
+<<<<<<< HEAD
+            return redirect('/')
+        if user == None:
+            flask.flash("Invalid email or password, please try again.")
+            return redirect("/login")
+=======
             return redirect("/")
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
     return render_template("login.html")
 
@@ -227,6 +280,11 @@ def future():
     return flask.render_template("future.html")
 
 
+<<<<<<< HEAD
+app.run(
+    host="localhost", port=int(os.getenv("PORT", "8080")), debug=True
+)
+=======
 @app.route("/wallets")
 def wallets():
     return flask.render_template("wallets.html")
@@ -251,3 +309,4 @@ if __name__ == "__main__":
     app.run(
         host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
     )
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
