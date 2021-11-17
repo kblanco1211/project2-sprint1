@@ -22,26 +22,6 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 
 
-class User(UserMixin, db.Model):
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(80), unique=True)
-    username = db.Column(db.String(100))
-    password_hash = db.Column(db.String())
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-
-db = SQLAlchemy(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
-
 class UserModel(UserMixin, db.Model):
     __tablename__ = 'users'
  
@@ -58,9 +38,12 @@ class UserModel(UserMixin, db.Model):
 class NFTsave(db.Model):
     __tablename__= 'nfts'
     id = db.Column(db.Integer, primary_key=True)
+    image_url = db.Column(db.String(200), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
     contract_address = db.Column(db.String(200), nullable=False)
     token_id = db.Column(db.String(200), nullable=False)
     username = db.Column(db.String(100))
+
 
 db.create_all()
 
@@ -130,13 +113,14 @@ def details():
 def save_nft():
     """Route that saves an NFT to a user's list of saved NFTs"""
     
-
+    image_url = flask.request.form.get("image_url")
+    name = flask.request.form.get("name")
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
 
     username = current_user.username
     NFT = NFTsave(
-        contract_address=contract_address, token_id=token_id, username=username
+        image_url=image_url,name = name,contract_address=contract_address, token_id=token_id, username=username
     )
     db.session.add(NFT)
     db.session.commit()
@@ -180,7 +164,7 @@ def login():
         return redirect("/")
     if request.method == "POST":
         email = request.form["email"]
-        user = User.query.filter_by(email=email).first()
+        user = UserModel.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
             return redirect('/')
@@ -201,10 +185,10 @@ def signup():
         username = request.form["username"]
         password = request.form["password"]
 
-        if User.query.filter_by(email=email).first():
+        if UserModel.query.filter_by(email=email).first():
             return "Email already Present"
 
-        user = User(email=email, username=username)
+        user = UserModel(email=email, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()

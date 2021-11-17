@@ -23,6 +23,8 @@
                 {% endif %}
 
                 <form action="/save_nft" method="POST">
+                    <input type="hidden" name="image_url" value="{{ image_url }}">
+                    <input type="hidden" name="name" value="{{ name }}">
                     <input type="hidden" name="contract_address" value="{{ contract_address }}">
                     <input type="hidden" name="token_id" value="{{ token_id }}">
                     <input type="submit" value="Save NFT">

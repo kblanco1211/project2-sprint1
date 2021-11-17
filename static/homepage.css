@@ -36,6 +36,10 @@ a.btnStack:hover {
     
 }
 
+#saved{
+    text-align: center;
+  }
+
 .cell {
     border: 1px solid black;
 }
