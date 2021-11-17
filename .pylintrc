@@ -5,7 +5,8 @@ disable=
     missing-class-docstring,
     too-few-public-methods,
     redefined-builtin,
-    invalid-name
+    invalid-name,
     singleton-comparison,
     broad-except,
-    too-many-locals
+    too-many-locals,
+    missing-function-docstring,
