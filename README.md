@@ -96,6 +96,20 @@ After that you would have get the OpenSea API. After that you would have to crea
 postgresql url to match the ones in main.py. From there you your able to run the program on your machine. You can also add a gitignore file where you add your .env file to it , if you wish to push this to github so your url wont be out there in public.
 
 
+### Linting
+The following errors/warnings were disabled for reasons listed below:
+- ```line-too-long```: Triggered only by lines containing comments that were describing the API calls. This is ignored because these it explains fuctions of the API.
+- ```import-error```: For some reason it says it has an error but the app runs on heroku and local so no errors on our end.
+- ```too-few-public-methods```: They were disbled because we cant delete itll affect our code.
+- ```redefined-builtin,```: We wanted to keep the fuction that name as well flet it was the best suited for that function.
+- ```invalid-name```: The variable names in our files are either readable or self-explanatory.
+- ```broad-except```: Felt code ran smoothly and didnt want to affect deployment.
+- ```too-many-locals```: We need alot of variables since it a big project so we disabled this.
+
+
+
+
+
 
 
 

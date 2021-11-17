@@ -30,6 +30,7 @@ login_manager.login_view = "login"
 
 
 class UserModel(UserMixin, db.Model):
+    """Makes database to save user login"""
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -47,6 +48,7 @@ class UserModel(UserMixin, db.Model):
 
 
 class NFTsave(db.Model):
+    """Makes database to save user NFTs"""
     __tablename__ = "nfts"
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(200), nullable=False)
@@ -187,7 +189,7 @@ def login():
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
             return redirect("/")
-        if user == None:
+        if user is None:
             flask.flash("Invalid email or password, please try again.")
             return redirect("/login")
 
