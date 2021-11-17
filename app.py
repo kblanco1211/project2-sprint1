@@ -46,7 +46,6 @@ class UserModel(UserMixin, db.Model):
         """checks password hash"""
         return check_password_hash(self.password_hash, password)
 
-
 class NFTsave(db.Model):
     """Makes database to save user NFTs"""
     __tablename__ = "nfts"

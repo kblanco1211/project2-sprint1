@@ -100,11 +100,13 @@ postgresql url to match the ones in main.py. From there you your able to run the
 The following errors/warnings were disabled for reasons listed below:
 - ```line-too-long```: Triggered only by lines containing comments that were describing the API calls. This is ignored because these it explains fuctions of the API.
 - ```import-error```: For some reason it says it has an error but the app runs on heroku and local so no errors on our end.
-- ```too-few-public-methods```: They were disbled because we cant delete itll affect our code.
+- ```too-few-public-methods```: They were disabled because we use it as a dictionary in our database 
 - ```redefined-builtin,```: We wanted to keep the fuction that name as well flet it was the best suited for that function.
-- ```invalid-name```: The variable names in our files are either readable or self-explanatory.
-- ```broad-except```: Felt code ran smoothly and didnt want to affect deployment.
+- ```invalid-name```: The variable names in our files where readable or self-explanatory so we disabled it.
+- ```broad-except```: Felt code ran smoothly and didn't want to affect deployment.
 - ```too-many-locals```: We need alot of variables since it a big project so we disabled this.
+- ```missing-class-docstring```: We added a docstring under the class but error still showed up so we disabled it 
+
 
 
 
