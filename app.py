@@ -38,9 +38,11 @@ class UserModel(UserMixin, db.Model):
     password_hash = db.Column(db.String())
 
     def set_password(self, password):
+        """ generates hash for password"""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+        """checks password hash"""
         return check_password_hash(self.password_hash, password)
 
 
@@ -59,6 +61,7 @@ db.create_all()
 
 @login_manager.user_loader
 def load_user(id):
+    """loads user"""
     return UserModel.query.get(int(id))
 
 
@@ -175,6 +178,7 @@ def saved():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    """Routes user to login"""
     if current_user.is_authenticated:
         return redirect("/")
     if request.method == "POST":
@@ -192,6 +196,7 @@ def login():
 
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
+    """Routes user to sign up page"""
     if current_user.is_authenticated:
         return redirect("/")
 
@@ -213,6 +218,7 @@ def signup():
 
 @app.route("/logout")
 def logout():
+    """logouts user"""
     logout_user()
     return redirect("/login")
 
@@ -220,54 +226,63 @@ def logout():
 @app.route("/why")
 @login_required
 def why():
+    """routes to why tab"""
     return flask.render_template("why.html")
 
 
 @app.route("/history")
 @login_required
 def history():
+    """routes to history tab"""
     return flask.render_template("history.html")
 
 
 @app.route("/crypto")
 @login_required
 def crypto():
+    """routes to cryto tab"""
     return flask.render_template("crypto.html")
 
 
 @app.route("/purchase")
 @login_required
 def purchase():
+    """routes to purchase tab"""
     return flask.render_template("purchase.html")
 
 
 @app.route("/future")
 @login_required
 def future():
+    """routes to future tab"""
     return flask.render_template("future.html")
 
 
 @app.route("/wallets")
 @login_required
 def wallets():
+    """routes to wallets tab"""
     return flask.render_template("wallets.html")
 
 
 @app.route("/ethereum")
 @login_required
 def ethereum():
+    """routes to ethereum tab"""
     return flask.render_template("ethereum.html")
 
 
 @app.route("/polygon")
 @login_required
 def polygon():
+    """routes to polygon tab"""
     return flask.render_template("polygon.html")
 
 
 @app.route("/klaytn")
 @login_required
 def klaytn():
+    """routes to klaytn tab"""
     return flask.render_template("klaytn.html")
 
 
