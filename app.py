@@ -1,7 +1,6 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
-<<<<<<< HEAD
 from flask import render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user, login_user, logout_user, LoginManager, UserMixin
