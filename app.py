@@ -5,19 +5,6 @@ import flask
 from flask import render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user, login_user, logout_user, LoginManager, UserMixin
-=======
-from flask import render_template, request, redirect
-from flask_login import (
-    LoginManager,
-    login_manager,
-    login_required,
-    current_user,
-    login_user,
-    logout_user,
-    UserMixin,
-)
-from flask_sqlalchemy import SQLAlchemy
->>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -51,7 +38,6 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-<<<<<<< HEAD
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -82,24 +68,6 @@ db.create_all()
 @login_manager.user_loader
 def load_user(id):
     return UserModel.query.get(int(id))    
-=======
-class NFTsave(db.Model):
-    __tablename__ = "nftsaved"
-    id = db.Column(db.Integer, primary_key=True)
-    contract_address = db.Column(db.String(80), nullable=False)
-    token_id = db.Column(db.String(80), nullable=False)
-
-    def get_assets(self, token_id):
-        return get_single_asset(self.contract_address, token_id)
-
-
-db.create_all()
-
-
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
->>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
 
 @app.route("/")
@@ -216,14 +184,10 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
-<<<<<<< HEAD
             return redirect('/')
         if user == None:
             flask.flash("Invalid email or password, please try again.")
             return redirect("/login")
-=======
-            return redirect("/")
->>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
     return render_template("login.html")
 
@@ -280,11 +244,6 @@ def future():
     return flask.render_template("future.html")
 
 
-<<<<<<< HEAD
-app.run(
-    host="localhost", port=int(os.getenv("PORT", "8080")), debug=True
-)
-=======
 @app.route("/wallets")
 def wallets():
     return flask.render_template("wallets.html")
@@ -309,4 +268,3 @@ if __name__ == "__main__":
     app.run(
         host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
     )
->>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
