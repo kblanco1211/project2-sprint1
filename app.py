@@ -1,9 +1,16 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
-from flask import render_template,request,redirect
+from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_required, current_user, login_user, logout_user, LoginManager, UserMixin
+from flask_login import (
+    login_required,
+    current_user,
+    login_user,
+    logout_user,
+    LoginManager,
+    UserMixin,
+)
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -23,20 +30,22 @@ login_manager.login_view = "login"
 
 
 class UserModel(UserMixin, db.Model):
-    __tablename__ = 'users'
- 
+    __tablename__ = "users"
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True)
     username = db.Column(db.String(100))
     password_hash = db.Column(db.String())
 
-    def set_password(self,password):
+    def set_password(self, password):
         self.password_hash = generate_password_hash(password)
-        
-    def check_password(self,password):
-        return check_password_hash(self.password_hash,password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
 class NFTsave(db.Model):
-    __tablename__= 'nfts'
+    __tablename__ = "nfts"
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(200), nullable=False)
     name = db.Column(db.String(200), nullable=False)
@@ -47,16 +56,16 @@ class NFTsave(db.Model):
 
 db.create_all()
 
+
 @login_manager.user_loader
 def load_user(id):
-    return UserModel.query.get(int(id))    
+    return UserModel.query.get(int(id))
 
 
 @app.route("/")
 @login_required
 def index():
     """App homepage"""
-    print("In index")
 
     return flask.render_template("index.html")
 
@@ -85,14 +94,14 @@ def explore():
 @login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
-    print("1")
+
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
-    print("2")
+
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
-    print("3")
+
     return flask.render_template(
         "details.html",
         image_url=asset_details["image_url"],
@@ -114,7 +123,7 @@ def details():
 @login_required
 def save_nft():
     """Route that saves an NFT to a user's list of saved NFTs"""
-    
+
     image_url = flask.request.form.get("image_url")
     name = flask.request.form.get("name")
     contract_address = flask.request.form.get("contract_address")
@@ -122,7 +131,11 @@ def save_nft():
 
     username = current_user.username
     NFT = NFTsave(
-        image_url=image_url,name = name,contract_address=contract_address, token_id=token_id, username=username
+        image_url=image_url,
+        name=name,
+        contract_address=contract_address,
+        token_id=token_id,
+        username=username,
     )
     db.session.add(NFT)
     db.session.commit()
@@ -155,13 +168,12 @@ def save_nft():
 @login_required
 def saved():
     """Route that displays a user's displayed NFTs."""
-    savednfts = NFTsave.query.filter_by(username = current_user.username).all()
-    print(savednfts)
+    savednfts = NFTsave.query.filter_by(username=current_user.username).all()
+
     return flask.render_template("saved.html", savednfts=savednfts)
 
 
 @app.route("/login", methods=["POST", "GET"])
-@login_required
 def login():
     if current_user.is_authenticated:
         return redirect("/")
@@ -170,7 +182,7 @@ def login():
         user = UserModel.query.filter_by(email=email).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
-            return redirect('/')
+            return redirect("/")
         if user == None:
             flask.flash("Invalid email or password, please try again.")
             return redirect("/login")
@@ -179,7 +191,6 @@ def login():
 
 
 @app.route("/signup", methods=["POST", "GET"])
-@login_required
 def signup():
     if current_user.is_authenticated:
         return redirect("/")
