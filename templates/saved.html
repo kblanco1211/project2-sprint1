@@ -1,1 +1,35 @@
-<!-- View that displays to users all of their saved articles -->
+<html>
+
+<head>
+    <title>NFT Information </title>
+    <link rel="stylesheet" href="/static/homepage.css">
+
+</head>
+
+<body>
+    <h1>Explore NFTs</h1>
+    <div class="container">
+        {% for i in range(16) %}
+        <div class="nft">
+            {% if image_urls[i] == "" %}
+            <img src="/static/nft.jpg" alt="NFT image"> <br>
+            {% else %}
+            <img src="{{ image_urls[i] }}" alt="NFT image"> <br>
+            {% endif %}
+            <b>{{ collections[i] }}</b> <br>
+            {% if names[i] == None %}
+            <b># {{ token_ids[i] }}</b> <br>
+            {% else %}
+            <b>{{ names[i] }}</b> <br>
+            {% endif %}
+            <form action="/details" method="POST">
+                <b>Click to learn more about this NFT!</b>
+                <input type="hidden" name="contract_address" value="{{ contract_addresses[i] }}">
+                <input type="hidden" name="token_id" value="{{ token_ids[i] }}">
+                <input type="submit" value="Learn More">
+            </form>
+        </div>
+        {% endfor %}
+</body>
+
+</html>
