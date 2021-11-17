@@ -1,9 +1,23 @@
 """Main app file that contains flask server logic."""
 import os
 import flask
+<<<<<<< HEAD
 from flask import render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user, login_user, logout_user, LoginManager, UserMixin
+=======
+from flask import render_template, request, redirect
+from flask_login import (
+    LoginManager,
+    login_manager,
+    login_required,
+    current_user,
+    login_user,
+    logout_user,
+    UserMixin,
+)
+from flask_sqlalchemy import SQLAlchemy
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,7 +30,28 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
 
+
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True)
+    username = db.Column(db.String(100))
+    password_hash = db.Column(db.String())
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+<<<<<<< HEAD
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -47,6 +82,24 @@ db.create_all()
 @login_manager.user_loader
 def load_user(id):
     return UserModel.query.get(int(id))    
+=======
+class NFTsave(db.Model):
+    __tablename__ = "nftsaved"
+    id = db.Column(db.Integer, primary_key=True)
+    contract_address = db.Column(db.String(80), nullable=False)
+    token_id = db.Column(db.String(80), nullable=False)
+
+    def get_assets(self, token_id):
+        return get_single_asset(self.contract_address, token_id)
+
+
+db.create_all()
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
 
 @app.route("/")
@@ -153,47 +206,53 @@ def saved():
     print(savednfts)
     return flask.render_template("saved.html", savednfts=savednfts)
 
-@app.route('/login', methods = ['POST','GET'])
+
+@app.route("/login", methods=["POST", "GET"])
 def login():
     if current_user.is_authenticated:
-        return redirect('/')
-    if request.method == 'POST':
-        email = request.form['email']
-        user = UserModel.query.filter_by(email = email).first()
-        if user is not None and user.check_password(request.form['password']):
+        return redirect("/")
+    if request.method == "POST":
+        email = request.form["email"]
+        user = User.query.filter_by(email=email).first()
+        if user is not None and user.check_password(request.form["password"]):
             login_user(user)
+<<<<<<< HEAD
             return redirect('/')
         if user == None:
             flask.flash("Invalid email or password, please try again.")
             return redirect("/login")
+=======
+            return redirect("/")
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
 
-    return render_template('login.html')
+    return render_template("login.html")
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route("/signup", methods=["POST", "GET"])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/')
-     
-    if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
- 
-        if UserModel.query.filter_by(email=email).first():
-            return ('Email already Present')
-             
-        user = UserModel(email=email, username=username)
+        return redirect("/")
+
+    if request.method == "POST":
+        email = request.form["email"]
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if User.query.filter_by(email=email).first():
+            return "Email already Present"
+
+        user = User(email=email, username=username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        return redirect('/')
-    return render_template('signup.html')
+        return redirect("/")
+    return render_template("signup.html")
 
-@app.route('/logout')
+
+@app.route("/logout")
 def logout():
     logout_user()
-    return redirect('/login')
+    return redirect("/login")
 
 
 @app.route("/why")
@@ -221,6 +280,33 @@ def future():
     return flask.render_template("future.html")
 
 
+<<<<<<< HEAD
 app.run(
     host="localhost", port=int(os.getenv("PORT", "8080")), debug=True
 )
+=======
+@app.route("/wallets")
+def wallets():
+    return flask.render_template("wallets.html")
+
+
+@app.route("/ethereum")
+def ethereum():
+    return flask.render_template("ethereum.html")
+
+
+@app.route("/polygon")
+def polygon():
+    return flask.render_template("polygon.html")
+
+
+@app.route("/klaytn")
+def klaytn():
+    return flask.render_template("klaytn.html")
+
+
+if __name__ == "__main__":
+    app.run(
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
+    )
+>>>>>>> 81ee4854b943be985468dc0f32d385b57b4a4db4
