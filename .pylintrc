@@ -6,5 +6,4 @@ disable=
     redefined-builtin,
     invalid-name,
     broad-except,
-    too-many-locals,
-    missing-class-docstring
+    too-many-locals

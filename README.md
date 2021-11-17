@@ -105,8 +105,6 @@ The following errors/warnings were disabled for reasons listed below:
 - ```invalid-name```: The variable names in our files where readable or self-explanatory so we disabled it.
 - ```broad-except```: Felt code ran smoothly and didn't want to affect deployment.
 - ```too-many-locals```: We need alot of variables since it a big project so we disabled this.
-- ```missing-class-docstring```: We added a docstring under the class but error still showed up so we disabled it 
-
 
 
 
