@@ -82,6 +82,7 @@ def explore():
 
 
 @app.route("/details", methods=["POST"])
+@login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
     print("1")
@@ -110,6 +111,7 @@ def details():
 
 
 @app.route("/save_nft", methods=["POST"])
+@login_required
 def save_nft():
     """Route that saves an NFT to a user's list of saved NFTs"""
     
@@ -159,6 +161,7 @@ def saved():
 
 
 @app.route("/login", methods=["POST", "GET"])
+@login_required
 def login():
     if current_user.is_authenticated:
         return redirect("/")
@@ -176,6 +179,7 @@ def login():
 
 
 @app.route("/signup", methods=["POST", "GET"])
+@login_required
 def signup():
     if current_user.is_authenticated:
         return redirect("/")
@@ -203,46 +207,55 @@ def logout():
 
 
 @app.route("/why")
+@login_required
 def why():
     return flask.render_template("why.html")
 
 
 @app.route("/history")
+@login_required
 def history():
     return flask.render_template("history.html")
 
 
 @app.route("/crypto")
+@login_required
 def crypto():
     return flask.render_template("crypto.html")
 
 
 @app.route("/purchase")
+@login_required
 def purchase():
     return flask.render_template("purchase.html")
 
 
 @app.route("/future")
+@login_required
 def future():
     return flask.render_template("future.html")
 
 
 @app.route("/wallets")
+@login_required
 def wallets():
     return flask.render_template("wallets.html")
 
 
 @app.route("/ethereum")
+@login_required
 def ethereum():
     return flask.render_template("ethereum.html")
 
 
 @app.route("/polygon")
+@login_required
 def polygon():
     return flask.render_template("polygon.html")
 
 
 @app.route("/klaytn")
+@login_required
 def klaytn():
     return flask.render_template("klaytn.html")
 
