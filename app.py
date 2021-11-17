@@ -11,9 +11,9 @@ from flask_login import (
     LoginManager,
     UserMixin,
 )
-from opensea import get_assets, get_single_asset
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
+from opensea import get_assets, get_single_asset
 
 load_dotenv(find_dotenv())
 

@@ -1,0 +1,11 @@
+[MESSAGES CONTROL]
+disable=
+    line-too-long,
+    import-error,
+    missing-class-docstring,
+    too-few-public-methods,
+    redefined-builtin,
+    invalid-name
+    singleton-comparison,
+    broad-except,
+    too-many-locals
