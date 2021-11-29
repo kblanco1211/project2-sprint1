@@ -15,8 +15,11 @@ h1 {
 
 img {
     border-radius: 25px;
+    border-style: solid;
     max-width: 100%;
-    max-height: 500px;
+    max-height: 450px;
+    min-width: 100%;
+    min-height: 450px;
 }
 
 .container {

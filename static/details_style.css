@@ -10,7 +10,9 @@ body {
 
 .left, .right {
   display: inline-block;
-  max-width: 50%;
+  max-width: 30%;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .nft {
@@ -30,6 +32,8 @@ img {
   border-radius: 25px; 
   border-style: solid;
   border-color: black;
+  max-width: 500px;
+  min-width: 500px;
 }
 
 .save {
@@ -113,8 +117,8 @@ a.btnStack:hover {
 
 .left1{
   float: left
-  
 }
+
 .centerbutton{
   margin: 8px;
 }

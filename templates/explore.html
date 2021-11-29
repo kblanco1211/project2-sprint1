@@ -14,7 +14,7 @@
             </div>
         </nav>
     </div>
-    
+
     <h1>Explore NFTs</h1>
     <div class="container">
         {% for i in range(16) %}
@@ -22,7 +22,7 @@
             {% if image_urls[i] == "" %}
             <img src="/static/nft.jpg" alt="NFT image"> <br>
             {% else %}
-            <img src="{{ image_urls[i] }}" alt="NFT image"> <br>
+            <img src="{{ image_urls[i] }}" alt="NFT image"> <br><br>
             {% endif %}
             <b>{{ collections[i] }}</b> <br>
             {% if names[i] == None %}
