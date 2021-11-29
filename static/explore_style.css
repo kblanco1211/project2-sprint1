@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
     font-family: Arial;
     text-align: center;
@@ -17,8 +23,9 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 10px 10px;
-    max-width: 100%;
+    gap: 15px 15px;
+    max-width: 98%;
+    margin: auto;
 }
 
 .nft {

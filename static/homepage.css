@@ -85,3 +85,8 @@ h1{
 
 }
 
+img {
+    border-radius: 25px; 
+    border-style: solid;
+    border-color: black;
+  }

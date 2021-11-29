@@ -4,12 +4,13 @@ body {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .left, .right {
-  flex: 50%;
-  margin: auto;
+  display: inline-block;
+  max-width: 50%;
 }
 
 .nft {
