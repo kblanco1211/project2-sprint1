@@ -1,5 +1,8 @@
 """Main app file that contains flask server logic."""
+import requests
+from requests.models import Response
 import os
+import json
 import flask
 from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -78,19 +81,31 @@ def index():
 @login_required
 def explore():
     """Route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details."""
+    
+    url = "https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset=0&limit=25"
 
-    assets = get_assets()
-
+    response = requests.request("GET", url)
+    
+    """
     if assets == "error":
         return flask.render_template("api_error.html", error="explore")
+    """
+    
+    json_text = json.loads(response.text)
+    assets_image_urls = [asset["image_url"] for asset in json_text["assets"]]
+    assets_name = [asset["name"] for asset in json_text["assets"]]
+    assets_collection_desc = [asset["collection"]["name"] for asset in json_text["assets"]]
+    assets_contact_addr = [asset["asset_contract"]["address"] for asset in json_text["assets"]]
+    assets_token_id = [asset["token_id"] for asset in json_text["assets"]]
+    
 
     return flask.render_template(
         "explore.html",
-        image_urls=assets["image_urls"],
-        names=assets["names"],
-        collections=assets["collections"],
-        contract_addresses=assets["contract_addresses"],
-        token_ids=assets["token_ids"],
+        image_urls=assets_image_urls,
+        names=assets_name,
+        collections=assets_collection_desc,
+        contract_addresses=assets_contact_addr,
+        token_ids=assets_token_id,
     )
 
 
@@ -102,10 +117,18 @@ def details():
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
+    
+    url = "https://api.opensea.io/api/v1/assets?token_ids=" + token_id + "&asset_contract_address=" + contract_address 
+
+    response = requests.request("GET", url)
+
+    json_text = json.loads(response.text)
+
+    assets_sale_price = float("0." + str(json_text["assets"][0]["last_sale"]["total_price"][:4]))
 
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
-
+    
     return flask.render_template(
         "details.html",
         image_url=asset_details["image_url"],
@@ -114,8 +137,8 @@ def details():
         collection_description=asset_details["collection_description"],
         description=asset_details["description"],
         creator=asset_details["creator"],
-        price=asset_details["price"],
-        crypto=asset_details["crypto"],
+        price=assets_sale_price,
+        crypto="ETH",
         trait_types=asset_details["trait_types"],
         traits=asset_details["traits"],
         contract_address=contract_address,
