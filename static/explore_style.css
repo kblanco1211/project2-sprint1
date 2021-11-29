@@ -9,6 +9,7 @@ h1 {
 
 img {
     border-radius: 25px;
+    max-width: 100%;
 }
 
 .container {
@@ -16,6 +17,7 @@ img {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 10px 10px;
+    max-width: 100%;
 }
 
 .nft {
