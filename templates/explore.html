@@ -12,10 +12,19 @@
                 <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
                 <a href={{ url_for('saved') }} class="btnStack  ">Saved</a>
             </div>
+            <div class="right">
+                <a href={{ url_for('why') }} class="btnStack  ">The why</a>
+                <a href={{ url_for('history') }} class="btnStack  ">History</a>
+                <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
+                <a href={{ url_for('purchase') }} class="btnStack  ">How To Purchase</a>
+                <a href={{ url_for('future') }} class="btnStack  ">The Future</a>
+                <a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
+            </div>
         </nav>
     </div>
 
     <h1>Explore NFTs</h1>
+
     <div class="container">
         {% for i in range(20) %}
         <div class="nft">
