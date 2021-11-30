@@ -17,20 +17,7 @@ def get_assets():
     # url link and parameters used to make an opensea retrieve assets api call
     # the api call returns information for individual NFTs or assets the amount of assets returned is given by the parameters
     url = "https://api.opensea.io/api/v1/assets"
-    collection_slugs = [
-        "boredapeyachtclub",
-        "cryptopunks",
-        "mutant-ape-yacht-club",
-        "edifice-by-ben-kovach",
-        "cool-cats-nft",
-        "lilbabyapeclub",
-        "doodles-official",
-        "cryptoadz-by-gremplin",
-        "cyberkongz",
-        "mekaverse",
-    ]
-    i = random.randrange(len(collection_slugs))
-    params = {"limit": 16, "collection": collection_slugs[i]}
+    params = {"limit": 20}
 
     # try except is to account for if there is an error when making the api call
     try:
@@ -39,7 +26,7 @@ def get_assets():
         response_json = response.json()
 
         # this loop parses the response json and stores the correct information for each NFT in the correct lists
-        for i in range(16):
+        for i in range(20):
             image_urls.append(response_json["assets"][i]["image_url"])
             names.append(response_json["assets"][i]["name"])
             try:
@@ -86,8 +73,9 @@ def get_single_asset(contract_address, token_id):
         except Exception:
             creator = None
         try:
-            string_price = response_json["orders"][0]["current_price"]
-            price = round(int(string_price) * 0.000000000000000001, 3)
+            # string_price = response_json["orders"][0]["current_price"]
+            # price = round(int(string_price) * 0.000000000000000001, 3)
+            price = float("0." + str(response_json["last_sale"]["total_price"][:4]))
         except Exception:
             price = None
         try:

@@ -25,7 +25,7 @@ img {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 15px 15px;
     max-width: 98%;
     margin: auto;
