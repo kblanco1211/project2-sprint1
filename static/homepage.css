@@ -41,7 +41,9 @@ a.btnStack:hover {
   }
 
 .cell {
-    border: 1px solid black;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 4px;
 }
 
 .centerbutton{
