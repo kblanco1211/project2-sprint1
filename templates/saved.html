@@ -2,7 +2,7 @@
 
 <head>
     <title>NFT Information </title>
-    <link rel="stylesheet" href="/static/homepage.css">
+    <link rel="stylesheet" href="/static/saved_style.css">
 
 </head>
 
@@ -12,7 +12,6 @@
             <div class="left">
                 <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
                 <a href={{ url_for('explore') }} class="btnStack ">Explore NFTs</a>
-                <a href={{ url_for('saved') }} class="btnStack  ">Saved</a>
             </div>
             <div class="right">
                 <a href={{ url_for('why') }} class="btnStack  ">The why</a>
@@ -24,22 +23,26 @@
             </div>
         </nav>
     </div>
-    <h2 style="text-align: center;">Saved NFT's</h2>
-    <ul>
+
+    <h1>Saved NFT's</h1>
+
+    <div class="container">
         {% for i in range(savednfts|length) %}
-        <li><img src="{{ savednfts[i].image_url }}" alt="NFT image"></li>
-        {% if savednfts[i].name == None %}
-        <li># {{ savednfts[i].token_id }}</li>
-        {% else %}
-        <li>{{ savednfts[i].name }}</li>
-        {% endif %}
-        <form action="/details" method="POST">
-            <input type="hidden" name="contract_address" value="{{ savednfts[i].contract_address }}">
-            <input type="hidden" name="token_id" value="{{ savednfts[i].token_id }}">
-            <input type="submit" value="Details">
-        </form>
+        <div class="nft">
+            <img src="{{ savednfts[i].image_url }}" alt="NFT image"> <br><br>
+            {% if savednfts[i].name == None %}
+            <b># {{ savednfts[i].token_id }}</b> <br>
+            {% else %}
+            <b>{{ savednfts[i].name }}</b> <br>
+            {% endif %}
+            <form action="/details" method="POST">
+                <input type="hidden" name="contract_address" value="{{ savednfts[i].contract_address }}">
+                <input type="hidden" name="token_id" value="{{ savednfts[i].token_id }}">
+                <input type="submit" value="Details">
+            </form>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 
 </html>

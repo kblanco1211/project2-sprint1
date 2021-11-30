@@ -107,6 +107,7 @@ body {
 }
 
 
+
 .type{
     color: black; 
     margin: 10px 0 0 10px;
@@ -121,4 +122,11 @@ body {
   } 
 
 
+
+
+img {
+    border-radius: 25px; 
+    border-style: solid;
+    border-color: black;
+  }
 

@@ -4,12 +4,15 @@ body {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .left, .right {
-  flex: 50%;
-  margin: auto;
+  display: inline-block;
+  max-width: 30%;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .nft {
@@ -18,7 +21,7 @@ body {
 
 .flashes {
   font-weight: bold;
-  color: red;    
+  color: green;    
 }
 
 .name {
@@ -28,10 +31,12 @@ body {
 img {
   border-radius: 25px; 
   border-style: solid;
-  border-color: black;
+  border-width: 5px;
+  max-width: 500px;
+  min-width: 500px;
 }
 
-.save {
+input[type=submit] {
   background-color: #045faa;
   color: white;
   padding: 16px;
@@ -112,8 +117,12 @@ a.btnStack:hover {
 
 .left1{
   float: left
-  
 }
+
+.right1{
+  float: right
+}
+
 .centerbutton{
   margin: 8px;
 }
