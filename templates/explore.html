@@ -20,7 +20,7 @@
         {% for i in range(20) %}
         <div class="nft">
             {% if image_urls[i] == "" %}
-            <img src="/static/nft.jpg" alt="NFT image"> <br>
+            <img src="/static/nft.jpg" alt="NFT image"> <br><br>
             {% else %}
             <img src="{{ image_urls[i] }}" alt="NFT image"> <br><br>
             {% endif %}

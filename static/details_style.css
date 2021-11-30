@@ -36,7 +36,7 @@ img {
   min-width: 500px;
 }
 
-.save {
+input[type=submit] {
   background-color: #045faa;
   color: white;
   padding: 16px;
