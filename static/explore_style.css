@@ -26,28 +26,28 @@ img {
 }
 
 .btnStack {
-    font-family: monospace;
-    background-color: orange;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.428571429;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-  }
+  font-family: monospace;
+  background-color: rgb(0, 102, 255);
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius:  15px 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
   
   a.btnStack:hover {
     background-color: #000;
@@ -64,8 +64,29 @@ img {
   #navigation{
     height: 50px;
     width: auto;
-    background: lightblue;
   }
   .cell {
     border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 4px; 
   }
+  
+
+  body {
+    background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+

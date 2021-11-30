@@ -73,17 +73,18 @@ a.btnStack:hover {
 
 h1{
     text-align: center;
+    
 }
 
 .center{
-    text-align: center;
+    text-align: left;
 }
 
 #middleblock{
     height: auto;
-    width: 500;
-    margin-left: auto;
+    width: 800;
     margin-right: auto;
+    margin-left: auto;
 
 }
 
@@ -111,11 +112,13 @@ body {
     margin: 10px 0 0 10px;
     white-space: nowrap;
     overflow: hidden;
-    width: 15em;
+    width: 25em;
     animation: type 4s steps(60, end); 
   }
   
   @keyframes type{ 
     from { width: 0; } 
   } 
+
+
 

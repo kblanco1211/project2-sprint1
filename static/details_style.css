@@ -84,7 +84,7 @@ img {
 
 .btnStack {
   font-family: monospace;
-  background-color: orange;
+  background-color: rgb(0, 102, 255);
   color: white;
   text-decoration: none;
   display: inline-block;
@@ -98,7 +98,7 @@ img {
   vertical-align: middle;
   cursor: pointer;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius:  15px 15px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -121,8 +121,28 @@ a.btnStack:hover {
 #navigation{
   height: 50px;
   width: auto;
-  background: lightblue;
+  
 }
 .cell {
-  border: 1px solid black;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 4px;
+}
+
+body {
+  background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
