@@ -3,10 +3,29 @@
 <head>
     <title>NFT Information </title>
     <link rel="stylesheet" href="/static/homepage.css">
+    
 
 </head>
 
 <body>
+    <script>
+        window.addEventListener("load", function(){
+	var delay = 2;
+	var nodes = document.querySelectorAll
+(".animate");
+	for(var i=0; i<nodes.length; i++){
+		var words = nodes[i].innerText.split(" ");
+		nodes[i].innerHTML = "";
+for(var i2=0; i2<words.length; i2++){
+			var item = document.createElement("span");
+			item.innerText = words[i2];
+			var calc = (delay+((nodes.length + i2)/3));
+	item.style.animationDelay = calc+"s";
+			nodes[i].appendChild(item);
+}
+	}
+});
+    </script>
 
     <div id=navigation class="cell small-12 medium-12 large-12">
         <nav class="centerbutton">
@@ -24,8 +43,8 @@
             </div>
         </nav>
     </div>
-    <h1>What are NFTs</h1>
     <div id="middleblock" >
+        <h1 class="type">What are NFTs</h1>
         <p class="center">
             NFTs stand for a Non-fungible token. A "Non-fungible” more or less means
             that it’s unique and can’t be replaced with something else its one of a kind persay.
