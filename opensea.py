@@ -1,6 +1,5 @@
 """Contains all opensea api logic"""
 
-import random
 import requests
 
 
