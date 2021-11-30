@@ -34,6 +34,7 @@ login_manager.login_view = "login"
 
 class UserModel(UserMixin, db.Model):
     """Makes database to save user login"""
+
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -42,15 +43,17 @@ class UserModel(UserMixin, db.Model):
     password_hash = db.Column(db.String())
 
     def set_password(self, password):
-        """ generates hash for password"""
+        """generates hash for password"""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         """checks password hash"""
         return check_password_hash(self.password_hash, password)
 
+
 class NFTsave(db.Model):
     """Makes database to save user NFTs"""
+
     __tablename__ = "nfts"
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(200), nullable=False)
@@ -81,23 +84,26 @@ def index():
 @login_required
 def explore():
     """Route for the explore NFTs page that allows users to pick an NFT to learn more about it and its details."""
-    
+
     url = "https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset=0&limit=25"
 
     response = requests.request("GET", url)
-    
+
     """
     if assets == "error":
         return flask.render_template("api_error.html", error="explore")
     """
-    
+
     json_text = json.loads(response.text)
     assets_image_urls = [asset["image_url"] for asset in json_text["assets"]]
     assets_name = [asset["name"] for asset in json_text["assets"]]
-    assets_collection_desc = [asset["collection"]["name"] for asset in json_text["assets"]]
-    assets_contact_addr = [asset["asset_contract"]["address"] for asset in json_text["assets"]]
+    assets_collection_desc = [
+        asset["collection"]["name"] for asset in json_text["assets"]
+    ]
+    assets_contact_addr = [
+        asset["asset_contract"]["address"] for asset in json_text["assets"]
+    ]
     assets_token_id = [asset["token_id"] for asset in json_text["assets"]]
-    
 
     return flask.render_template(
         "explore.html",
@@ -117,18 +123,25 @@ def details():
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
-    
-    url = "https://api.opensea.io/api/v1/assets?token_ids=" + token_id + "&asset_contract_address=" + contract_address 
+
+    url = (
+        "https://api.opensea.io/api/v1/assets?token_ids="
+        + token_id
+        + "&asset_contract_address="
+        + contract_address
+    )
 
     response = requests.request("GET", url)
 
     json_text = json.loads(response.text)
 
-    assets_sale_price = float("0." + str(json_text["assets"][0]["last_sale"]["total_price"][:4]))
+    assets_sale_price = float(
+        "0." + str(json_text["assets"][0]["last_sale"]["total_price"][:4])
+    )
 
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
-    
+
     return flask.render_template(
         "details.html",
         image_url=asset_details["image_url"],
