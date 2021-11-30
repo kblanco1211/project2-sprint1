@@ -8,15 +8,25 @@
 <body>
     <div id=navigation class="cell small-12 medium-12 large-12">
         <nav class="centerbutton">
-            <div class="left">
-                <a href={{ url_for('explore') }} class="btnStack ">Explore NFTs</a>
+            <div class="left1">
                 <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
+                <a href={{ url_for('explore') }} class="btnStack ">Explore NFTs</a>
                 <a href={{ url_for('saved') }} class="btnStack  ">Saved</a>
             </div>
+            <div class="right1">
+                <a href={{ url_for('why') }} class="btnStack  ">The why</a>
+                <a href={{ url_for('history') }} class="btnStack  ">History</a>
+                <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
+                <a href={{ url_for('purchase') }} class="btnStack  ">How To Purchase</a>
+                <a href={{ url_for('future') }} class="btnStack  ">The Future</a>
+                <a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
+            </div>
         </nav>
-    <div class="container" >
-        <div class="left1">
+    </div>
+    <div class="container">
+        <div class="left">
             <div class="nft">
+                <br><br><br>
                 {% if image_url == "" %}
                 <img src="/static/nft.jpg" alt="NFT image"> <br><br>
                 {% else %}
@@ -59,7 +69,7 @@
                     <ul>
                         <li>
                             <b class="explanation">
-                                The owner of an NFT sets the price that it well sell for. This price can be fixed, or
+                                The owner of an NFT sets the price that it will sell for. This price can be fixed, or
                                 the owner can choose to allow people to bid on the NFT.
                             </b>
                         </li>
@@ -107,7 +117,7 @@
                                 blue above.
                                 NFTs in a collection are usually randomly designated traits, and NFTs within a
                                 collection are rarer when they have specific traits that many others in the collection
-                                don't have.
+                                do not have.
                             </b>
                         </li>
                     </ul>
@@ -124,8 +134,8 @@
                             <b class="explanation">
                                 The contract address of an NFT refers to the unique address where the contract is
                                 deployed on the Ethereum block chain.
-                                A contract is needed to make an NFT a part of the blockchain, and they assign ownership
-                                and manage the transferibility of an NFT.
+                                A contract is needed to make an NFT a part of the blockchain, and they assign
+                                ownership and manage the transferibility of an NFT.
                             </b>
                         </li>
                         <li>
