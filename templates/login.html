@@ -51,6 +51,16 @@
                         <input class="btnn" type="submit" value="Login">
                     </form>
 
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+
                     <p class="link">Don't Have an Account?<br>
                         <a href="/signup"><u>Sign up here</u></a>
                     </p>

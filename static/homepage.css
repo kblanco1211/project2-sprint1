@@ -41,9 +41,9 @@ a.btnStack:hover {
   }
 
 .cell {
-    border: 1.5px solid black;
+   
     border-radius: 10px;
-    box-shadow: 2px 4px;
+    
 }
 
 .centerbutton{
@@ -53,6 +53,7 @@ a.btnStack:hover {
 #navigation{
     height: 50px;
     width: auto;
+    
     
     
 }
@@ -70,6 +71,7 @@ a.btnStack:hover {
 
 h1{
     text-align: center;
+   
     
 }
 
@@ -86,29 +88,23 @@ h1{
 }
 
 body {
-    background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
-    background-size: 400% 400%;
-    animation: gradient 20s ease infinite;
+    background: url( 1.jpg);
+    color: white;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
     font-family: Arial;	
     
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+
 
 
 
 .type{
-    color: black; 
+    color: rgb(0, 102, 255);  
     margin:0 auto;
     white-space: nowrap;
     overflow: hidden; 

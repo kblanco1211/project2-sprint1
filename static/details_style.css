@@ -11,8 +11,8 @@ body {
 .left, .right {
   display: inline-block;
   max-width: 30%;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .nft {
@@ -59,6 +59,7 @@ input[type=submit] {
   border: none;
   border-radius: 25px;
   width: 300px
+  
 }
 
 .dropdown {
