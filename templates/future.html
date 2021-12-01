@@ -8,13 +8,15 @@
 
 <body>
 
-    <div id=navigation class="cell small-12 medium-12 large-12">
+    <div id=navigation class="cell small-12 medium-12 large-12 shadow">
         <nav class="centerbutton">
             <div class="left">
                 <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
+                <a href={{ url_for('explore') }} class="btnStack ">Explore NFTs</a>
+                <a href={{ url_for('saved') }} class="btnStack  ">Saved</a>
             </div>
             <div class="right">
-                <a href={{ url_for('why') }} class="btnStack  ">The why</a>
+                <a href={{ url_for('why') }} class="btnStack  ">The Why</a>
                 <a href={{ url_for('history') }} class="btnStack  ">History</a>
                 <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
                 <div class="dropdown">
@@ -37,7 +39,7 @@
 
     
     <div id="middleblock">
-        <h1 class="type">The future of NFTs</h1>
+        <h1 class="type">The Future of NFTs</h1>
         <p class="center shadow">
             NFTs are going to be a big part of the future. As we move into a more technological society NFTs will be a
             big step into that. Companies are now going virtual with the rise of the Metaverse companies are hopping on

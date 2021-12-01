@@ -1,5 +1,5 @@
 .btnStack {
-    font-family: monospace;
+    font-family: Arial;
     background-color: rgb(0, 102, 255);
     color: white;
     text-decoration: none;
@@ -47,11 +47,12 @@ a.btnStack:hover {
 }
 
 .centerbutton{
-    margin: 8px;
+    margin: 0%;
+   
 }
 
 #navigation{
-    height: 50px;
+    height: 40px;
     width: auto;
     
     
