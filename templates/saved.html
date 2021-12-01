@@ -17,7 +17,17 @@
                 <a href={{ url_for('why') }} class="btnStack  ">The why</a>
                 <a href={{ url_for('history') }} class="btnStack  ">History</a>
                 <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
-                <a href={{ url_for('purchase') }} class="btnStack  ">How To Purchase</a>
+                 <div class="dropdown">
+                    <span>
+                        <a href={{ url_for('purchase') }} class="btnStack dropdown ">How To Purchase</a>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href={{ url_for('wallets') }} class="btnStack  ">Wallets</a>
+                        <a href={{ url_for('ethereum') }} class="btnStack  ">Ethereum</a>
+                        <a href={{ url_for('polygon') }} class="btnStack  ">Polygon</a>
+                        <a href={{ url_for('klaytn') }} class="btnStack  ">Klaytn</a>            
+                    </div>
+                  </div>
                 <a href={{ url_for('future') }} class="btnStack  ">The Future</a>
                 <a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
             </div>
