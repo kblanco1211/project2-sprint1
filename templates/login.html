@@ -1,49 +1,63 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="eng">
 
 <head>
-    <title>NFTStache</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <title> NFTStache </title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-        <div class="container">
-            <div class="row">
-                <div class="padded">
-                    <h1>NFTStache</h1>
-                    <div class="text-center">
-                        <p>Your introduction into the world of NFTs.</p>
-                    </div>
-                </div>
-                <div class="padded">
-                    <form action="/login" method="POST">
-                        <input type="text" name="email" placeholder="Email">
-                        <input type="password" name="password" placeholder="Password">
-                        <input class="btn btn-primary" type="submit" value="Login">
-                    </form>
-                    {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <ul class="flashes">
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">NFTStache</h2>
+            </div>
+
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">What</a></li>
+                    <p class="center">
+                    </p>
+                    <li><a href="#">Why </a></li>
+                    <li><a href="#">Created </a></li>
                 </ul>
-                {% endif %}
-                {% endwith %}
-                    <!-- <p><span class="psw">Forgot password?</span></p> -->
-                    <hr>
-                    <a type="button" href="/signup" class="btn btn-dark">Create new Account</a>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To Text">
+                <a href="#"><button class="btn">search</button></a>
+            </div>
+
+            <div class="content">
+                <h1> <span>Development</span></h1>
+                <p class="par">This webapp aims to deliver an app that teaches people about NFTs.
+                    <br>The app will be purposed towards users who are first getting into NFTs or <br> have not even
+                    heard of them before.
+                    <br>It will provide users with information that lets them know everything they need to know about
+                    NFTs.<br>This includes what they are, why they are so popular and expensive,
+                    <br>
+                </p>
+
+                <button class="cn"><a href="#">ENJOY THE APP</a></button>
+
+                <div class="form">
+                    <h2> Login Here</h2>
+                    <form action="/login" method="POST">
+                        <input type="text" name="email" placeholder="Enter Email Here">
+                        <input type="password" name="password" placeholder="Enter Password Here">
+                        <input class="btnn" type="submit" value="Login">
+                    </form>
+
+                    <p class="link">Don't Have an Account<br>
+                        <a href="#">Sign up </a> Here</a>
+                    </p>
 
                 </div>
             </div>
-
         </div>
-
+    </div>
 </body>
 
 </html>
