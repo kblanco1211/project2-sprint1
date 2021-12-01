@@ -64,18 +64,20 @@
                 <br><br>
             </div>
 
-            {% if name == None %}
-            <b class="name"> # {{ token_id }}</b> <br>
-            {% else %}
-            <b class="name"> {{ name }}</b> <br>
-            {% endif %}
-            <b>Created By: {{ creator }}</b> <br>
-            <b>Description: {{ description }}</b> <br><br>
+            <div class="white">
+                {% if name == None %}
+                <b class="name"> # {{ token_id }}</b> <br>
+                {% else %}
+                <b class="name"> {{ name }}</b> <br>
+                {% endif %}
+                <b>Created By: {{ creator }}</b> <br>
+                <b>Description: {{ description }}</b> <br><br>
+            </div>
         </div>
 
         <div class="right">
             <div class="dropdown">
-                <button class="dropbtn"><b>Pricing: {{ crypto }} {{ price }}</b></button>
+                <button class="dropbtn"><b>Pricing: {{ crypto }} {{ price }} ($ {{ usd_price }})</b></button>
                 <div class="dropdown-content">
                     <ul>
                         <li>

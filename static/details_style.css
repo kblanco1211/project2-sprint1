@@ -1,6 +1,6 @@
 body {
     font-family: Arial;
-    color: white;
+    color: black;
 }
 
 .container {
@@ -27,6 +27,10 @@ body {
 
 .name {
   font-size: 32px;
+}
+
+.white {
+  color: white;
 }
 
 img {

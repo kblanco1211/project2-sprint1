@@ -104,12 +104,11 @@ def explore():
 @login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
-   
-    
+
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
-    
+
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
 
@@ -122,6 +121,7 @@ def details():
         description=asset_details["description"],
         creator=asset_details["creator"],
         price=asset_details["price"],
+        usd_price=asset_details["usd_price"],
         crypto="ETH",
         trait_types=asset_details["trait_types"],
         traits=asset_details["traits"],
@@ -266,16 +266,25 @@ def future():
     return flask.render_template("future.html")
 
 
-wallet2 = ["Metamask","Coinbase Wallet","Enjin", "Trust Wallet","AlphaWallet","Ledger"]
+wallet2 = [
+    "Metamask",
+    "Coinbase Wallet",
+    "Enjin",
+    "Trust Wallet",
+    "AlphaWallet",
+    "Ledger",
+]
 
-images2=[
+images2 = [
     "/static/metamask.png",
     "/static/coinbase.png",
     "/static/enjin.png",
     "/static/trust.png",
     "/static/alpha.png",
-    "/static/ledger.png"
+    "/static/ledger.png",
 ]
+
+
 @app.route("/wallets")
 @login_required
 def wallets():
@@ -285,7 +294,6 @@ def wallets():
         length=len(wallet2),
         wallets=wallet2,
         images=images2,
-
     )
 
 
