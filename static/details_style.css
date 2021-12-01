@@ -1,5 +1,6 @@
 body {
     font-family: Arial;
+    color: white;
 }
 
 .container {
@@ -34,6 +35,8 @@ img {
   border-width: 5px;
   max-width: 500px;
   min-width: 500px;
+  border-color: white;
+  background-color: white;
 }
 
 input[type=submit] {
@@ -137,15 +140,16 @@ a.btnStack:hover {
   
 }
 .cell {
-  border: 1.5px solid black;
   border-radius: 10px;
-  box-shadow: 2px 4px;
 }
 
 body {
-  background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(1.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 109vh;
+
 }
 
 @keyframes gradient {

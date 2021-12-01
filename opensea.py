@@ -1,7 +1,8 @@
 """Contains all opensea api logic"""
 
 import requests
-
+from requests.models import Response
+import json
 
 def get_assets():
     """Information for several NFTs are returned by this function, and it is used to display information on the explore NFTs page"""
@@ -15,7 +16,7 @@ def get_assets():
 
     # url link and parameters used to make an opensea retrieve assets api call
     # the api call returns information for individual NFTs or assets the amount of assets returned is given by the parameters
-    url = "https://api.opensea.io/api/v1/assets"
+    url = "https://api.opensea.io/api/v1/assets?order_by=sale_date&order_direction=desc&offset=0&limit=20"
     params = {"limit": 20}
 
     # try except is to account for if there is an error when making the api call
@@ -56,12 +57,12 @@ def get_single_asset(contract_address, token_id):
 
     # url link used to make the opensea retrieve single asset api call
     url = f"https://api.opensea.io/api/v1/asset/{contract_address}/{token_id}/"
-
     # try except is to account for if there is an error when making the api call
     try:
         response = requests.get(url)
         response_json = response.json()
-
+        print(response_json)
+        
         image_url = response_json["image_url"]
         name = response_json["name"]
         collection = response_json["collection"]["name"]
@@ -72,11 +73,9 @@ def get_single_asset(contract_address, token_id):
         except Exception:
             creator = None
         try:
-            # string_price = response_json["orders"][0]["current_price"]
-            # price = round(int(string_price) * 0.000000000000000001, 3)
             price = float("0." + str(response_json["last_sale"]["total_price"][:4]))
         except Exception:
-            price = None
+            price = None     
         try:
             crypto = response_json["orders"][0]["payment_token_contract"]["symbol"]
         except Exception:
