@@ -1,43 +1,47 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="eng">
 <head>
-    <title>NFTScache</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+    <title> NFTStache </title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-        <div class="container">
-            <div class="row">
-                <div class="padded">
-                    <h1>NFTStache</h1>
-                    <div class="text-center">
-                        <p>Your introduction into the world of NFTs.</p>
-                    </div>
-                </div>
-                <div class="padded">
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">NFTStache</h2>
+            </div>
+
+
+
+            <div class="content">
+                 <p class="par">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br><span><strong>What is NFTStache</strong></span>:<br>Non-Fungible Token. It is a digital asset that can be bought and sold <br> like any other property.
+                <br><strong><span>Our Goal</span></strong>:<br> one of the greatest usage of buying art is it lets you financially support<br>artists you like, and that's true with NFTs.Buying an NFT also usually gets you<br>some basic usage rights,like being able to post the image online or set it<br>as your profile picture
+                <br><strong><span>Developers</span></strong>:<br>Kevina Blanco,Romina Karimaei,Jairo Cruz,Nick Albano<br>
+                <br></p>
+
+                <button class="cn"><a href="#">ENJOY THE APP</a></button>
+
+                <div class="form">
+                    <h2> Sign up</h2>
                     <form  method="POST" action="/signup">
                         <input type="email" name="email" placeholder="Email">
                         <input type = "text" name ="username" placeholder="Username">
                         <input type="password" name="password" placeholder="Password">
-                        <input class="btn btn-primary" type="submit" value="Sign Up">
+                        <input class="btnn" type="submit" value="Sign Up">
                     </form>
-                    <!-- <p><span class="psw">Forgot password?</span></p> -->
-                    <hr>
+
                     <a type="button" href="/login" class="btn btn-dark">Already have an Account</a>
 
                 </div>
             </div>
         </div>
-
-
-    </form>
-
+    </div>
 </body>
 
 </html>
