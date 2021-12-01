@@ -109,24 +109,26 @@ body {
 
 .type{
     color: black; 
-    margin: 10px 0 0 10px;
+    margin:0 auto;
     white-space: nowrap;
-    overflow: hidden;
-    width: 25em;
-    animation: type 4s steps(60, end); 
+    overflow: hidden; 
+    animation: type 1.5s steps(40, end);
+ 
   }
   
   @keyframes type{ 
-    from { width: 0; } 
+    from { width: 0 }
+  to { width: 50% }
   } 
-
-
 
 
 img {
     border-radius: 25px; 
     border-style: solid;
     border-color: black;
+    
+    
+    
   }
 
 .dropdown {

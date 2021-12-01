@@ -54,14 +54,20 @@
 
         <h2>Top Wallets</h2>
         <ol>
-            <li>Metamask</li>
-            <li>Coinbase Wallet</li>
-            <li>Enjin</li>
-            <li>Trust Wallet</li>
-            <li>AlphaWallet</li>
-            <li>Ledger</li>
-            
-
+            {%for i in range(0, length)%}
+                <div style="display:grid; grid-template-columns:1fr 1fr; column-gap:5px;">
+                    <div style="grid-column:1">
+                        {%if wallets[i] == "Haikyuu"%}
+                            <li >{{wallets[i]}}</li>
+                        {%else%}
+                            <li>{{wallets[i]}}</li>
+                        {%endif%}
+                    </div>
+                    <div style="grid-column:2">
+                        <img src={{images[i]}} width=150 height=150/>
+                    </div>
+                </div>
+            {%endfor%} 
         </ol>
 
 </body>
