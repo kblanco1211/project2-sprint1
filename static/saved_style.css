@@ -1,9 +1,13 @@
 body {
     font-family: Arial;
     text-align: center;
-    background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite; 
+    background: url( 1.jpg);
+    color: white;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 109vh;
 }
 
 .btnStack {
@@ -47,9 +51,9 @@ h1 {
 }
 
 .cell {
-    border: 1px solid black;
+    
     border-radius: 10px;
-    box-shadow: 2px 4px; 
+   
 }
 
 .centerbutton {
@@ -109,17 +113,8 @@ input[type=submit] {
     font-weight: bold;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+
+
 
 .dropdown {
     position: static;
@@ -145,4 +140,5 @@ input[type=submit] {
 .dropdown:hover .dropdown-content {
     display:block;
 }
+
 

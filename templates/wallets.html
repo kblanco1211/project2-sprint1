@@ -38,7 +38,7 @@
     <div id="middleblock">
         <h1 class="type">Wallets</h1>
 
-        <p class="center">
+        <p class="center shadow">
             NFT wallets are digital wallets that help your store NFTs and cryptocurrencies in one place. The wallets
             help you in receiving additional assets alongside purchasing things with the assets in your ownership. The
             massive upsurge in NFT purchases in recent times has also led to the development of functionalities in NFT
@@ -53,7 +53,8 @@
         </p>
 
         <h2>Top Wallets</h2>
-        <ol>
+        <div class="shadow">
+        <ol >
             {%for i in range(0, length)%}
                 <div style="display:grid; grid-template-columns:1fr 1fr; column-gap:5px;">
                     <div style="grid-column:1">
@@ -69,6 +70,7 @@
                 </div>
             {%endfor%} 
         </ol>
+    </div>
 
 </body>
 

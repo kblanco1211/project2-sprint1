@@ -7,13 +7,18 @@
 body {
   font-family: Arial;
   text-align: center;
-  background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;  
+  background: url( 1.jpg);
+  color: white;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(1.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 109vh;
 }
 
 h1 {
     font-size: 100px;
+    color: rgb(0, 102, 255);
 }
 
 img {
@@ -25,6 +30,7 @@ img {
     max-height: 450px;
     min-width: 100%;
     min-height: 450px;
+    background-color: white;
 }
 
 .container {
@@ -51,7 +57,7 @@ img {
 }
 
 .nft:hover {
-  box-shadow: 6px 6px 40px 10px rgb(0, 0, 0);
+  box-shadow: 6px 6px 40px 10px rgb(0, 102, 255);
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
   transform: scale(1.05);
