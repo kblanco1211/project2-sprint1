@@ -10,19 +10,26 @@
 
     <div id=navigation class="cell small-12 medium-12 large-12">
         <nav class="centerbutton">
-            <!--
-                might make this into more tabs since it a lengty process to purchase.
-            -->
             <div class="left">
                 <a href={{ url_for('index') }} class="btnStack ">Mainpage</a>
-                <a href={{ url_for('purchase') }} class="btnStack ">How to Purchase</a>
             </div>
             <div class="right">
-                <a href={{ url_for('ethereum') }} class="btnStack  ">Ethereum</a>
-                <a href={{ url_for('polygon') }} class="btnStack  ">Polygon</a>
-                <a href={{ url_for('klaytn') }} class="btnStack  ">Klaytn</a>
-
-
+                <a href={{ url_for('why') }} class="btnStack  ">The why</a>
+                <a href={{ url_for('history') }} class="btnStack  ">History</a>
+                <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
+                <div class="dropdown">
+                    <span>
+                        <a href={{ url_for('purchase') }} class="btnStack dropdown ">How To Purchase</a>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href={{ url_for('wallets') }} class="btnStack  ">Wallets</a>
+                        <a href={{ url_for('ethereum') }} class="btnStack  ">Ethereum</a>
+                        <a href={{ url_for('polygon') }} class="btnStack  ">Polygon</a>
+                        <a href={{ url_for('klaytn') }} class="btnStack  ">Klaytn</a>            
+                    </div>
+                  </div>
+                <a href={{ url_for('future') }} class="btnStack  ">The Future</a>
+                <a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
             </div>
 
         </nav>

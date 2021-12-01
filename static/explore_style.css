@@ -7,7 +7,7 @@
 body {
   font-family: Arial;
   text-align: center;
-  background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
+  background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;  
 }
@@ -127,3 +127,27 @@ input[type=submit] {
     }
 }
 
+.dropdown {
+  position: static;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 12px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+ 
+  padding: 12px 12px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown:hover .dropdown-content {
+  display:block;
+}
