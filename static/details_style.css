@@ -95,7 +95,7 @@ input[type=submit] {
 .dropdown:hover .dropbtn {background-color: #356eb8;}
 
 .btnStack {
-  font-family: monospace;
+  font-family: Arial;
   background-color: rgb(0, 102, 255);
   color: white;
   text-decoration: none;
@@ -131,11 +131,11 @@ a.btnStack:hover {
 }
 
 .centerbutton{
-  margin: 8px;
+  margin: 0%;
 }
 
 #navigation{
-  height: 50px;
+  height: 40px;
   width: auto;
   
 }
@@ -188,4 +188,10 @@ body {
 }
 .dropdown1:hover .dropdown1-content1 {
   display:block;
+}
+
+.shadow {
+  background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+  border-radius: 10px;
+  padding: 10px;
 }
