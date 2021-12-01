@@ -5,8 +5,11 @@
 }
 
 body {
-    font-family: Arial;
-    text-align: center;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;  
 }
 
 h1 {
@@ -111,13 +114,6 @@ input[type=submit] {
     border-radius: 10px;
     box-shadow: 2px 4px; 
   }
-  
-
-  body {
-    background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
-    background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
-}
 
 @keyframes gradient {
     0% {
