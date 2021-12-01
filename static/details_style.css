@@ -11,8 +11,8 @@ body {
 .left, .right {
   display: inline-block;
   max-width: 30%;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .nft {
@@ -41,6 +41,7 @@ input[type=submit] {
   color: white;
   padding: 16px;
   font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 25px;
   width: 125px  
@@ -58,6 +59,7 @@ input[type=submit] {
   border: none;
   border-radius: 25px;
   width: 300px
+  
 }
 
 .dropdown {
@@ -68,7 +70,9 @@ input[type=submit] {
 .dropdown-content {
   display: none;
   position: absolute;
+  padding-right: 15px;
   background-color: #f1f1f1;
+  border-radius: 25px;
   min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -139,11 +143,17 @@ a.btnStack:hover {
 }
 
 body {
+<<<<<<< HEAD
   width: 100%;
   background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(1.jpg);
   background-position: center;
   background-size: cover;
   height: 109vh;
+=======
+  background: linear-gradient(-45deg,  #af4bbe,   #236ad5, rgb(91, 13, 216), #c300ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+>>>>>>> 843ee071ed7cb023bc152676fcf42d47c09fd14b
 }
 
 @keyframes gradient {
@@ -156,4 +166,30 @@ body {
   100% {
       background-position: 0% 50%;
   }
+}
+
+
+.dropdown1 {
+  position: static;
+  display: inline-block;
+}
+
+.dropdown1-content1 {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 12px;
+  z-index: 1;
+}
+
+.dropdown1-content1 a {
+ 
+  padding: 12px 12px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown1:hover .dropdown1-content1 {
+  display:block;
 }

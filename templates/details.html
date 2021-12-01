@@ -17,12 +17,23 @@
                 <a href={{ url_for('why') }} class="btnStack  ">The why</a>
                 <a href={{ url_for('history') }} class="btnStack  ">History</a>
                 <a href={{ url_for('crypto') }} class="btnStack  ">Crypto Currency</a>
-                <a href={{ url_for('purchase') }} class="btnStack  ">How To Purchase</a>
+                <div class="dropdown1">
+                    <span>
+                        <a href={{ url_for('purchase') }} class="btnStack dropdown ">How To Purchase</a>
+                    </span>
+                    <div class="dropdown1-content1">
+                        <a href={{ url_for('wallets') }} class="btnStack  ">Wallets</a>
+                        <a href={{ url_for('ethereum') }} class="btnStack  ">Ethereum</a>
+                        <a href={{ url_for('polygon') }} class="btnStack  ">Polygon</a>
+                        <a href={{ url_for('klaytn') }} class="btnStack  ">Klaytn</a>
+                    </div>
+                </div>
                 <a href={{ url_for('future') }} class="btnStack  ">The Future</a>
                 <a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
             </div>
         </nav>
     </div>
+
     <div class="container">
         <div class="left">
             <div class="nft">
@@ -64,7 +75,7 @@
 
         <div class="right">
             <div class="dropdown">
-                <button class="dropbtn"><b><u>Pricing: {{ crypto }} {{ price }}</u></b></button>
+                <button class="dropbtn"><b>Pricing: {{ crypto }} {{ price }}</b></button>
                 <div class="dropdown-content">
                     <ul>
                         <li>
@@ -87,7 +98,7 @@
             </div> <br><br>
 
             <div class="dropdown">
-                <button class="dropbtn"><b><u>Collection: {{ collection }}</u></b></button>
+                <button class="dropbtn"><b>Collection: {{ collection }}</b></button>
                 <div class="dropdown-content">
                     <ul>
                         <li>{{ collection_description }}</li>
@@ -103,7 +114,7 @@
             </div> <br><br>
 
             <div class="dropdown">
-                <button class="dropbtn"><b><u>Traits</u></b></button>
+                <button class="dropbtn"><b>Traits</b></button>
                 <div class="dropdown-content">
                     <ul>
                         {% for i in range(trait_types|length) %}
@@ -125,7 +136,7 @@
             </div> <br><br>
 
             <div class="dropdown">
-                <button class="dropbtn"><b><u>Details</u></b></button>
+                <button class="dropbtn"><b>Details</b></button>
                 <div class="dropdown-content">
                     <ul>
                         <li>Contract Address: {{contract_address}}</li>

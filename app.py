@@ -266,11 +266,27 @@ def future():
     return flask.render_template("future.html")
 
 
+wallet2 = ["Metamask","Coinbase Wallet","Enjin", "Trust Wallet","AlphaWallet","Ledger"]
+
+images2=[
+    "/static/metamask.png",
+    "/static/coinbase.png",
+    "/static/enjin.png",
+    "/static/trust.png",
+    "/static/alpha.png",
+    "/static/ledger.png"
+]
 @app.route("/wallets")
 @login_required
 def wallets():
     """routes to wallets tab"""
-    return flask.render_template("wallets.html")
+    return flask.render_template(
+        "wallets.html",
+        length=len(wallet2),
+        wallets=wallet2,
+        images=images2,
+
+    )
 
 
 @app.route("/ethereum")

@@ -3,55 +3,66 @@
 
 <head>
     <title> NFTStache </title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="main">
         <div class="navbar">
+            <br><br>
             <div class="icon">
-                <h2 class="logo">NFTStache</h2>
+                <h1 class="logo">NFTStache</h1>
             </div>
 
 
-            <div class="menu">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">What</a></li>
-                    <p class="center">
-                    </p>
-                    <li><a href="#">Why </a></li>
-                    <li><a href="#">Created </a></li>
-                </ul>
-            </div>
-
-            <div class="search">
-                <input class="srch" type="search" name="" placeholder="Type To Text">
-                <a href="#"><button class="btn">search</button></a>
-            </div>
 
             <div class="content">
-                <h1> <span>Development</span></h1>
-                <p class="par">This webapp aims to deliver an app that teaches people about NFTs.
-                    <br>The app will be purposed towards users who are first getting into NFTs or <br> have not even
-                    heard of them before.
-                    <br>It will provide users with information that lets them know everything they need to know about
-                    NFTs.<br>This includes what they are, why they are so popular and expensive,
-                    <br>
+                <p class="par">
+                    <br><br><br><br><br><br>
+                    <span><strong>What is NFTStache?</strong></span> <br>
+                    <b>
+                       NFTStache is your introduction to the world of NFTs.<br>
+                       Our app will teach you everything you need to know about NFTs, ranging from <br>what they are to being able to know how to purchase them.<br>
+                       Explore real NFTs on the marketplace and learn about their real time details.
+
+                    </b> <br><br>
+                    <strong><span>Our Goal</strong></span> <br>
+                    <b>
+                       The topic of NFTs has been on the rise recently and has been booming up in popularity.<br> 
+                       With them being so popular and novel, this leaves many people curious about the world of NFTs.<br>Our goal is to get 
+                       people on the NFT hype train. We want to provide the knowledge so people can <br>know everything 
+                       they need to know about NFTs. Since the world of NFTs can be very lucrative,<br> and its an emerging technology, we want people to 
+                       be informed on this new phenomenon that is taking over. 
+                    </b> <br><br>
+                    <strong><span>Developers</strong></span> <br>
+                    <b>
+                        Kevin Blanco<br>
+                        Romina Karimaei<br>
+                        Jairo Cruz<br>
+                        Nick Albano<br>
+                    </b>
                 </p>
 
-                <button class="cn"><a href="#">ENJOY THE APP</a></button>
-
                 <div class="form">
-                    <h2> Login Here</h2>
+                    <h2>NFTStache</h2>
                     <form action="/login" method="POST">
-                        <input type="text" name="email" placeholder="Enter Email Here">
-                        <input type="password" name="password" placeholder="Enter Password Here">
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password"> <br>
                         <input class="btnn" type="submit" value="Login">
                     </form>
 
-                    <p class="link">Don't Have an Account<br>
-                        <a href="#">Sign up </a> Here</a>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+
+                    <p class="link">Don't Have an Account?<br>
+                        <a href="/signup"><u>Sign up here</u></a>
                     </p>
 
                 </div>
