@@ -104,11 +104,12 @@ def explore():
 @login_required
 def details():
     """Route that displays and explains the details of a chosen NFT."""
-
+   
+    
     contract_address = flask.request.form.get("contract_address")
     token_id = flask.request.form.get("token_id")
     asset_details = get_single_asset(contract_address, token_id)
-
+    
     if asset_details == "error":
         return flask.render_template("api_error.html", error="details")
 
@@ -121,7 +122,7 @@ def details():
         description=asset_details["description"],
         creator=asset_details["creator"],
         price=asset_details["price"],
-        crypto=asset_details["crypto"],
+        crypto="ETH",
         trait_types=asset_details["trait_types"],
         traits=asset_details["traits"],
         contract_address=contract_address,
