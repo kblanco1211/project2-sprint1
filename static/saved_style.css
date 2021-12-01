@@ -64,7 +64,7 @@ h1 {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 15px 15px;
+    gap: 20px 20px;
     max-width: 98%;
     margin: auto;
 }
@@ -75,8 +75,8 @@ h1 {
     border-width: 5px;    
     top: 0%;
     left: 0%;
-    width: 450px;
-    height: 530px;
+    width: 100%;
+    height: 100%;
     overflow: hidden; 
     white-space: nowrap; 
     text-overflow: ellipsis;
@@ -84,7 +84,7 @@ h1 {
 }
 
 .nft:hover {
-    box-shadow: 6px 6px 40px 10px rgb(18, 42, 146);
+    box-shadow: 6px 6px 40px 10px rgb(0, 0, 0);
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);

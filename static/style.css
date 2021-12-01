@@ -1,8 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-
-
 }
 
 .main{
@@ -20,25 +18,23 @@
 }
 
 .icon{
-    width: 200px;
     float: left;
-    height: 70px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .logo{
     color: rgb(0, 102, 255);
-    font-size:35px;
+    font-size:60px;
     font-family: Arial;
-    padding-left: 20px;
     float: left;
-    padding-top: 10px;
 }
 
 .menu{
     width: 400px;
     float: left;
     height: 70px;
-
 }
 
 ul{
@@ -46,7 +42,6 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 ul li{
@@ -108,9 +103,11 @@ ul li a:hover{
     outline:none;
 
 }
+
 .srch:focus{
     outline:none;
 }
+
 .content{
     width: 1200px;
     height: auto;
@@ -118,11 +115,9 @@ ul li a:hover{
     color:#fff;
     position: relative;
 }
+
 .content .par{
-    padding-left: 20px;
-    padding-bottom: 25px;
     font-family: Arial;
-    letter-spacing: 1.2px;
     line-height: 30px;
 }
 
@@ -171,7 +166,6 @@ ul li a:hover{
     left: 870px;
     border-radius: 10px;
     padding: 25px;
-
 }
 
 .form h2{
@@ -199,7 +193,7 @@ ul li a:hover{
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 30px;
-    font-family: sans-serif;
+    font-family: Arial;
 }
 
 .form input:focus{
