@@ -1,5 +1,6 @@
 body {
     font-family: Arial;
+    color: white;
 }
 
 .container {
@@ -34,6 +35,8 @@ img {
   border-width: 5px;
   max-width: 500px;
   min-width: 500px;
+  border-color: white;
+  background-color: white;
 }
 
 input[type=submit] {
@@ -137,9 +140,7 @@ a.btnStack:hover {
   
 }
 .cell {
-  border: 1.5px solid black;
   border-radius: 10px;
-  box-shadow: 2px 4px;
 }
 
 body {
@@ -148,6 +149,7 @@ body {
   background-position: center;
   background-size: cover;
   height: 109vh;
+
 }
 
 @keyframes gradient {
