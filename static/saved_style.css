@@ -49,11 +49,7 @@ h1 {
 .cell {
     border: 1px solid black;
     border-radius: 10px;
-<<<<<<< HEAD
     box-shadow: 2px 4px; 
-=======
-    box-shadow: 2px 4px;
->>>>>>> df34d058f4c5839470c0fb0b69031bb3bdc6fe2c
 }
 
 .centerbutton {
@@ -111,15 +107,6 @@ input[type=submit] {
     border-radius: 12px;
     padding: 5px 8px;
     font-weight: bold;
-<<<<<<< HEAD
-=======
-  }
-
-  body {
-    background: linear-gradient(-45deg,  #f3e5f5, #61c7f0, #23a6d5, #0077ff);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
->>>>>>> df34d058f4c5839470c0fb0b69031bb3bdc6fe2c
 }
 
 @keyframes gradient {
@@ -132,8 +119,4 @@ input[type=submit] {
     100% {
         background-position: 0% 50%;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> df34d058f4c5839470c0fb0b69031bb3bdc6fe2c
