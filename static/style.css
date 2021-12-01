@@ -26,7 +26,7 @@
 }
 
 .logo{
-    color: #ff7200;
+    color: rgb(0, 102, 255);
     font-size:35px;
     font-family: Arial;
     padding-left: 20px;
@@ -80,7 +80,7 @@ ul li a:hover{
     width: 200px;
     height:40px;
     background:transparent;
-    border: 1px solid #ff7200;
+    border: 1px solid rgb(0, 102, 255);
     margin-top: 13px;
     color: #fff;
     border-right: none;
@@ -95,8 +95,8 @@ ul li a:hover{
 .btn{
     width: 100px;
     height: 40px;
-    background: #ff7200;
-    border: 2px solid #ff7200;
+    background: rgb(0, 102, 255);
+    border: 2px solid rgb(0, 102, 255);
     margin-top: 13px;
     color:#fff;
     font-size: 15px;
@@ -136,7 +136,7 @@ ul li a:hover{
 .content .cn{
     width: 160px;
     height: 40px;
-    background: #ff7200;
+    background: rgb(0, 102, 255);
     border: none;
     margin-bottom: 10px;
     margin-left: 10px;
@@ -156,7 +156,7 @@ ul li a:hover{
     background: #fff;
 }
 .content span{
-    color: #ff7200;
+    color: rgb(0, 102, 255);
     overflow: hidden;
     white-space: nowrap;
     font-size: 60px;
@@ -178,7 +178,7 @@ ul li a:hover{
     width: 220px;
     font-family: Arial;
     text-align: center;
-    color:#ff7200;
+    color:rgb(0, 102, 255);
     font-size: 22px;
     background: #fff;
     border-radius: 10px;
@@ -191,7 +191,7 @@ ul li a:hover{
     width: 240px;
     height: 35px;
     background: transparent;
-    border-bottom: 1px solid #ff7200;
+    border-bottom: 1px solid rgb(0, 102, 255);
     border-top: none;
     border-right: none;
     border-left: none;
@@ -214,7 +214,7 @@ ul li a:hover{
 .btnn{
     width: 240px;
     height: 40px;
-    background: #ff7200;
+    background: rgb(0, 102, 255);
     border: none;
     margin-top: 30px;
     font-size: 18px;
@@ -226,7 +226,7 @@ ul li a:hover{
 
 .btnn:hover{
     background: #fff;
-    color:#ff7200;
+    color:rgb(0, 102, 255);
 }
 
 .btnn a{
@@ -243,7 +243,7 @@ ul li a:hover{
 
 .form .link a{
     text-decoration: none;
-    color: #ff7200;
+    color: rgb(0, 102, 255);
 }
 .liw{
     padding-top: 15px;
