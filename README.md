@@ -1,5 +1,5 @@
 ### Heroku URL
-(https://sheltered-fjord-56349.herokuapp.com)
+(https://salty-gorge-07691.herokuapp.com)
 
 # Project 2 - Sprint 1
 This webapp aims to deliver an app that teaches people about NFTs. The app will be purposed towards users who are first getting into NFTs or haven’t even heard of them before. It will provide users with information that lets them know everything they need to know about NFTs. This includes what they are, why they are so popular and expensive, how you would purchase them, etc. The app will also show users specific NFTs and display it’s real time details and explain to them what it all means. Overall, the purpose of the app is to teach users about NFTs, including what they are as a whole, the specific details of individual NFTs, and how they can start investing in NFTs
