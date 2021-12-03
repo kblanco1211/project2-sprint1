@@ -1,8 +1,6 @@
 """Contains all opensea api logic"""
-
 import requests
-from requests.models import Response
-import json
+
 
 
 def get_assets():

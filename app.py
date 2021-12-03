@@ -1,8 +1,5 @@
 """Main app file that contains flask server logic."""
-import requests
-from requests.models import Response
 import os
-import json
 import flask
 from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
